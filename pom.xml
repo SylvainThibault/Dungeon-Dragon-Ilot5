@@ -25,7 +25,7 @@ http://maven.apache.org/maven-v4_0_0.xsd">
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>game.Main</mainClass>
                                 </transformer>
-                            </transformers>
+                  36@hotmail.com          </transformers>
                         </configuration>
                     </execution>
                 </executions>

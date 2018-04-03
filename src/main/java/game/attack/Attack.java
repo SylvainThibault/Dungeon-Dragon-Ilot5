@@ -10,6 +10,14 @@ public abstract class Attack {
      * @return Name of the weapon / spell
      */
 
+    Attack(){
+    }
+
+    Attack(String name, int level){
+        this.setName(name);
+        this.setLevel(level);
+    }
+
     public String getName() {
         return this.name;
     }
@@ -41,5 +49,10 @@ public abstract class Attack {
         this.level = level;
     }
 
+//    public abstract int getDamage(Enemy enemy);
 
+    @Override
+    public String toString() {
+        return "name: " + this.getName() + ", level: " + this.getLevel();
+    }
 }
