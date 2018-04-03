@@ -16,7 +16,7 @@ public class Main {
 
         char diceYesNo;
         do {
-            System.out.println("Do you want to roll the dice ?");
+            System.out.println("Do you want to roll the dice ? (y/n)");
             Scanner sc = new Scanner(System.in);
             diceYesNo = sc.nextLine().charAt(0);
             System.out.println(rollDice());
