@@ -30,4 +30,3 @@ public class Wizard extends Perso {
         return super.toString() + "\nSpell : " + spell + "\nPhilter : " + philter;
     }
 }
-

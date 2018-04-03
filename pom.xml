@@ -23,7 +23,7 @@ http://maven.apache.org/maven-v4_0_0.xsd">
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>hello.HelloAgain</mainClass>
+                                    <mainClass>game.Main</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -37,11 +37,4 @@ http://maven.apache.org/maven-v4_0_0.xsd">
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-    </dependencies>
 </project>
