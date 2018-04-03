@@ -22,7 +22,7 @@ public class Main {
         Boolean endGame = true;
         while (endGame) {
             Scanner sc = new Scanner(System.in);
-            char test = sc.nextLine().charAt(0);
+            String test = sc.nextLine();
             if (!newGame.playTurn()) {
                 endGame = exitGame();
             }
