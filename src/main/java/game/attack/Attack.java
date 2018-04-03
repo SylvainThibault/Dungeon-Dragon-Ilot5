@@ -10,6 +10,14 @@ public abstract class Attack {
      * @return Name of the weapon / spell
      */
 
+    Attack(){
+    }
+
+    Attack(String name, int level){
+        this.setName(name);
+        this.setLevel(level);
+    }
+
     public String getName() {
         return this.name;
     }
