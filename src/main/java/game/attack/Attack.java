@@ -1,7 +1,5 @@
 package game.attack;
 
-import game.Enemy;
-
 public abstract class Attack {
 
     private String name;
