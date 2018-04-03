@@ -8,21 +8,21 @@ public class Warrior extends Perso {
     //ACCESSEURS//
 
     public String getWeapon() {
-        return weapon;
+        return this.weapon;
     }
 
     public int getShield() {
-        return shield;
+        return this.shield;
     }
 
     // MUTATEURS//
 
-    public void setWeapon(String pWeapon){
-        weapon = pWeapon;
+    public void setWeapon(String Weapon){
+        this.weapon = Weapon;
     }
 
-    public void setShield(int pShield){
-        shield = pShield;
+    public void setShield(int Shield){
+        this.shield = Shield;
     }
 
     // Méthode toString : Affiche les informations d'un objet
