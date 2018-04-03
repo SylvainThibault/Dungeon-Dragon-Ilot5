@@ -11,7 +11,7 @@ public abstract class Attack {
      */
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -29,7 +29,7 @@ public abstract class Attack {
      * @return power level of the weapon / spell
      */
     public int getLevel() {
-        return level;
+        return this.level;
     }
 
     /**
