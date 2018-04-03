@@ -8,21 +8,21 @@ public class Wizard extends Perso {
     //ACCESSEURS//
 
     public String getSpell() {
-        return spell;
+        return this.spell;
     }
 
     public int getPhilter() {
-        return philter;
+        return this.philter;
     }
 
     // MUTATEURS//
 
-    public void setSpell(String pSpell) {
-        spell = pSpell;
+    public void setSpell(String Spell) {
+        this.spell = Spell;
     }
 
-    public void setPhilter(int pPhilter) {
-        philter = pPhilter;
+    public void setPhilter(int Philter) {
+        this.philter = Philter;
     }
 
     // Méthode toString : Affiche les informations d'un objet

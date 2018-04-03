@@ -13,46 +13,46 @@ public abstract class Perso {
 
     //Return variable
     public String getName(){
-        return name;
+        return this.name;
     }
 
     public int getPower(){
-        return power;
+        return this.power;
     }
 
     public int getLife(){
-        return life;
+        return this.life;
     }
 
     public String getImage(){
-        return image;
+        return this.image;
     }
 
     public int getAmor(){
-        return armor;
+        return this.armor;
     }
 
     //mutateurs//
 
     // Définit variable
-    public void setName(String pName){
-        name = pName;
+    public void setName(String Name){
+        this.name = Name;
     }
 
-    public void setPower(int pPower){
-        power = pPower;
+    public void setPower(int Power){
+        this.power = Power;
     }
 
-    public void setLife(int pLife){
-        life = 100;
+    public void setLife(int Life){
+        this.life = 100;
     }
 
-    public void setImage(String pImage){
-        image = pImage;
+    public void setImage(String Image){
+        this.image = Image;
     }
 
-    public void setArmor(int pArmor){
-        armor = pArmor;
+    public void setArmor(int Armor){
+        this.armor = Armor;
     }
 
     public String toString(){
