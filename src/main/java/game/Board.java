@@ -42,8 +42,8 @@ public class Board {
         System.out.println("current square : "+ currentSquare);
         int newCurrentSquare = getCurrentSquare + diceResult;
 
-        if (newCurrentSquare >= 10){
-            this.setCurrentSquare(10);
+        if (newCurrentSquare >= 63){
+            this.setCurrentSquare(63);
             System.out.println("You reached the last square");
             return false;
         } else {

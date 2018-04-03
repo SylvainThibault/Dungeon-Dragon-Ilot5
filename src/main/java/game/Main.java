@@ -1,7 +1,6 @@
 package game;
 
 import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * The type Main.
@@ -17,31 +16,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        playDice();
         createCharacter();
-    }
-
-    public static Integer rollDice() {
-        Integer randomNum = ThreadLocalRandom.current().nextInt(1, 7);
-        return randomNum;
-    }
-
-    public static void playDice() {
-        char diceYesNo = 'y';
-        System.out.println("Do you want to roll the dice ? (y/whatever)");
-        try {
-            diceYesNo = sc.nextLine().charAt(0);
-        } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("!!! On a dit 'y' ou 'n' bouletto !!!\n");
-            playDice();
-        }
-        if (diceYesNo == 'y') {
-            System.out.println(rollDice());
-            playDice();
-        } else {
-            return;
-        }
-
     }
 
     public static void createCharacter() {
@@ -80,7 +55,7 @@ public class Main {
         if (choiceCreate.equals("1")) {
             createCharacter();
         } else {
-            playDice();
+            // start playing
         }
     }
 
@@ -101,7 +76,7 @@ public class Main {
         if (choiceCreate.equals("1")) {
             createCharacter();
         } else {
-            playDice();
+            // start playing
         }
     }
 }
