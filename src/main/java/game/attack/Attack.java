@@ -1,5 +1,7 @@
 package game.attack;
 
+import game.Enemy;
+
 public abstract class Attack {
 
     private String name;
@@ -49,5 +51,10 @@ public abstract class Attack {
         this.level = level;
     }
 
+//    public abstract int getDamage(Enemy enemy);
 
+    @Override
+    public String toString() {
+        return "name: " + this.getName() + ", level: " + this.getLevel();
+    }
 }

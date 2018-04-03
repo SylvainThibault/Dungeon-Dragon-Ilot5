@@ -1,5 +1,7 @@
 package game.attack;
 
+import game.Enemy;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,13 +11,24 @@ public class Weapon extends Attack {
         super(name, level);
     }
 
-    public static Map<String, Weapon> getWeapons() {
-        Map<String,Weapon> weaponMap = new HashMap<>();
+    public int getDamage(Enemy enemy) {
+        if(this.getName().equals("arc")){
+            if (enemy.getName().toLowerCase().equals("dragon")){
+                return 50;
+            } else if (enemy.getName().toLowerCase().equals("succube")){
+                return 25;
+            }
+        }
+        return this.getLevel();
+    }
 
-        weaponMap.put("arc", new Weapon("arc", 50));
-        weaponMap.put("massue", new Weapon("massue", 30));
-        weaponMap.put("epée", new Weapon("epée", 25));
+    public static Map<Integer, Weapon> getWeapons() {
+        Map<Integer,Weapon> weaponMap = new HashMap<>();
+        weaponMap.put(1, new Weapon("arc", 0));
+        weaponMap.put(2, new Weapon("massue", 30));
+        weaponMap.put(3, new Weapon("epée", 25));
 
         return weaponMap;
     }
+
 }
