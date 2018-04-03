@@ -14,12 +14,16 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        char diceYesNo;
+        char diceYesNo = 'y';
         do {
             System.out.println("Do you want to roll the dice ? (y/n)");
-            Scanner sc = new Scanner(System.in);
-            diceYesNo = sc.nextLine().charAt(0);
-            System.out.println(rollDice());
+            try {
+                Scanner sc = new Scanner(System.in);
+                diceYesNo = sc.nextLine().charAt(0);
+                System.out.println(rollDice());
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("!!! On a dit 'y' ou 'n' bouletto\n !!!");
+            }
         } while (diceYesNo == 'y');
     }
 
