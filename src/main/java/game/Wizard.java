@@ -1,4 +1,4 @@
-package main.java.game;
+package game;
 
 public class Wizard extends Perso {
     private String spell;
@@ -17,16 +17,17 @@ public class Wizard extends Perso {
 
     // MUTATEURS//
 
-    public void setSpell(String pSpell){
+    public void setSpell(String pSpell) {
         spell = pSpell;
     }
 
-    public void setPhilter(int pPhilter){
+    public void setPhilter(int pPhilter) {
         philter = pPhilter;
     }
 
     // Méthode toString : Affiche les informations d'un objet
-    public String toString(){
+    public String toString() {
         return super.toString() + "\nSpell : " + spell + "\nPhilter : " + philter;
     }
+}
 

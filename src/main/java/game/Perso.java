@@ -1,4 +1,4 @@
-package main.java.game;
+package game;
 
 public abstract class Perso {
 
@@ -24,7 +24,7 @@ public abstract class Perso {
         return life;
     }
 
-    public int getImage(){
+    public String getImage(){
         return image;
     }
 
@@ -56,6 +56,6 @@ public abstract class Perso {
     }
 
     public String toString(){
-        return "Name : "+ nom + "\nPower : " + power + "\nLife : " + life + "\nImage : " + image + "\nArmor : " + armor;
+        return "Name : "+ name + "\nPower : " + power + "\nLife : " + life + "\nImage : " + image + "\nArmor : " + armor;
     }
 }
