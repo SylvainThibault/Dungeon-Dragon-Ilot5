@@ -64,7 +64,7 @@ public class Main {
         if (choiceCreate.equals("1")) {
             createCharacter();
         } else {
-            // start playing
+            System.out.println("Start Playing!");
         }
     }
 
@@ -85,7 +85,7 @@ public class Main {
         if (choiceCreate.equals("1")) {
             createCharacter();
         } else {
-            // start playing
+            System.out.println("Start Playing!");
         }
     }
 
