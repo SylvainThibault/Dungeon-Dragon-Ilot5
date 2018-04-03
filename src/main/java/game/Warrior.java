@@ -1,4 +1,4 @@
-package main.java.game;
+package game;
 
 public class Warrior extends Perso {
     private String weapon;
