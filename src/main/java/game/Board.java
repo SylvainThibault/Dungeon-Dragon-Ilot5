@@ -36,10 +36,10 @@ public class Board {
     }
 
     public Boolean playTurn() {
-        int diceResult = diceResult();
-        System.out.println("dice result : "+ diceResult);
         int getCurrentSquare = this.getCurrentSquare();
         System.out.println("current square : "+ currentSquare);
+        int diceResult = diceResult();
+        System.out.println("dice result : "+ diceResult);
         int newCurrentSquare = getCurrentSquare + diceResult;
 
         if (newCurrentSquare >= 63){

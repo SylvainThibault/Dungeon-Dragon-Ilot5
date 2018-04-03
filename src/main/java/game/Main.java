@@ -17,6 +17,16 @@ public class Main {
 
     public static void main(String[] args) {
         createCharacter();
+
+        Board newGame = new Board();
+        Boolean endGame = true;
+        while (endGame) {
+            Scanner sc = new Scanner(System.in);
+            char test = sc.nextLine().charAt(0);
+            if (!newGame.playTurn()) {
+                endGame = exitGame();
+            }
+        }
     }
 
     public static void createCharacter() {
@@ -28,7 +38,6 @@ public class Main {
             System.out.println("You chose to create a warrior");
             createWarrior();
         }
-
         if (choiceCharacter.equals("2")) {
             System.out.println("You chose to create a wizard");
             createWizard();
@@ -78,6 +87,24 @@ public class Main {
         } else {
             // start playing
         }
+    }
+
+    public static Boolean exitGame() {
+        char yesNoAnswer = 'o';
+        while (yesNoAnswer != 'y') {
+            System.out.println("Do you want to exit Game ? (y/n)");
+            try {
+                Scanner sc = new Scanner(System.in);
+                yesNoAnswer = sc.nextLine().charAt(0);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("No answer, please try again :");
+            }
+            if (yesNoAnswer == 'n') {
+                System.out.println("Please exit the game");
+            }
+            System.out.println("You typed : " + yesNoAnswer);
+        }
+        return false;
     }
 }
 
