@@ -26,6 +26,7 @@ public class Main {
     }
 
     private static void newGame() {
+        System.out.println("Let's go!");
         Board newGame = new Board();
         Boolean endGame = true;
         while (endGame) {
