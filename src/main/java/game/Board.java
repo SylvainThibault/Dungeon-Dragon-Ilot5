@@ -1,6 +1,14 @@
 package game;
 
 
+import game.ennemies.Dragon;
+import game.ennemies.Enemy;
+import game.ennemies.Sorcerer;
+import game.ennemies.Succubus;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -15,6 +23,7 @@ public class Board {
      * The Squares.
      */
     public Object Squares[] = new Object[64];
+    private static List<Enemy> enemies = new ArrayList<>();
 
 
     /**
@@ -37,12 +46,12 @@ public class Board {
 
     public Boolean playTurn() {
         int getCurrentSquare = this.getCurrentSquare();
-        System.out.println("current square : "+ currentSquare);
+        System.out.println("current square : " + currentSquare);
         int diceResult = diceResult();
-        System.out.println("dice result : "+ diceResult);
+        System.out.println("dice result : " + diceResult);
         int newCurrentSquare = getCurrentSquare + diceResult;
 
-        if (newCurrentSquare >= 63){
+        if (newCurrentSquare >= 63) {
             this.setCurrentSquare(63);
             System.out.println("You reached the last square");
             return false;
@@ -62,4 +71,27 @@ public class Board {
         Integer randomNum = ThreadLocalRandom.current().nextInt(1, 7);
         return randomNum;
     }
+
+    public static void createEnnemies() {
+        int[] dragAttack = {80, 60, 40, 30, 20, 15};
+        int[] otherAttack = {75, 50, 25, 15};
+
+        for (int i = 0; i < 6; i++) {
+            enemies.add(new Dragon("Drago" + i, dragAttack[i], 1));
+        }
+
+        for (int i = 0; i < 4; i++) {
+            enemies.add(new Sorcerer("Sorcerer" + i, otherAttack[i]));
+        }
+
+        for (int i = 0; i < 4; i++) {
+            enemies.add(new Succubus("Succ" + i, otherAttack[i]));
+        }
+
+        for (Enemy enemy : enemies) {
+            System.out.println(enemy.toString());
+        }
+    }
 }
+
+
