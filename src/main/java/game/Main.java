@@ -25,7 +25,7 @@ public class Main {
         newGame();
     }
 
-    private static void newGame() {
+    private static Boolean newGame() {
         System.out.println("Let's go!");
         Board newGame = new Board();
         Boolean endGame = true;
@@ -35,7 +35,7 @@ public class Main {
             if (!newGame.playTurn()) {
                 endGame = exitGame();
             }
-        }
+        } return endGame;
     }
 
     public static void createCharacter() {
@@ -113,7 +113,7 @@ public class Main {
                 System.out.println("No answer, please try again :");
             }
             if (yesNoAnswer == '2') {
-                newGame();
+                return newGame();
             }
             System.out.println("You typed : " + yesNoAnswer);
         }
