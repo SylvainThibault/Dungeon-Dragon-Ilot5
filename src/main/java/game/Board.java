@@ -64,6 +64,9 @@ public class Board {
         } else {
             this.setCurrentSquare(newCurrentSquare);
             System.out.println("Your Character is now at Square n°" + currentSquare);
+            if (this.Squares[newCurrentSquare] != null) {
+                System.out.println(this.Squares[newCurrentSquare].toString());
+            }
             return true;
         }
     }
@@ -78,7 +81,7 @@ public class Board {
         return randomNum;
     }
 
-    public static ArrayList createEnnemies() {
+    public ArrayList createEnnemies() {
         int[] dragAttack = {80, 60, 40, 30, 20, 15};
         int[] otherAttack = {75, 50, 25, 15};
 
@@ -104,9 +107,6 @@ public class Board {
                 this.Squares[randomNum] = contentArray.get(numberOfItems-1);
                 numberOfItems--;
             }
-        }
-        for(int i = 0 ; i < Squares.length ; i++) {
-            System.out.println("Case n°" + (i+1) + " : " +Squares[i]);
         }
     }
 }

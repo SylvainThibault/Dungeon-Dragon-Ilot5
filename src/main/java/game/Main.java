@@ -1,5 +1,6 @@
 package game;
 
+import game.items.ItemGenerator;
 import game.items.attack.Weapon;
 
 import java.util.*;
@@ -27,8 +28,10 @@ public class Main {
 
     private static Boolean newGame() {
         Board newGame = new Board();
-        ArrayList enemiesList = newGame.createEnnemies();
-        newGame.randomizeSquareContent(enemiesList);
+
+        newGame.randomizeSquareContent(newGame.createEnnemies());
+        newGame.randomizeSquareContent(ItemGenerator.getItems());
+
         Boolean endGame = true;
         System.out.println("Let's go! (type 'return' to move forward");
         while (endGame) {
