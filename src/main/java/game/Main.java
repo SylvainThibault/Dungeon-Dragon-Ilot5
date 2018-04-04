@@ -1,5 +1,10 @@
 package game;
 
+import game.attack.Spell;
+import java.util.HashMap;
+import java.util.InputMismatchException;
+import java.util.Map;
+
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -19,6 +24,7 @@ public class Main {
     public static void main(String[] args) {
         playDice();
         createCharacter();
+        choseSpell();
     }
 
     public static Integer rollDice() {
@@ -102,6 +108,28 @@ public class Main {
             createCharacter();
         } else {
             playDice();
+        }
+    }
+
+
+
+    private static Spell choseSpell(){
+        Map<Integer,Spell> spellMap= Spell.getSpell();
+        System.out.println("Choose a spell");
+        for( Map.Entry<Integer, Spell> entry : spellMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue().getName());
+        }
+        try {
+            int spellId = sc.nextInt();
+//            sc.nextLine();
+            if (spellId < 1 || spellId >3){
+                throw new InputMismatchException();
+            }
+            return spellMap.get(spellId);
+        } catch (InputMismatchException e){
+            System.out.println("Wrong Entry");
+            sc.nextLine();
+            return choseSpell();
         }
     }
 }
