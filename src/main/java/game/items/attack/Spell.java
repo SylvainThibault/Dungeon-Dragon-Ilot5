@@ -1,4 +1,4 @@
-package game.attack;
+package game.items.attack;
 import java.util.HashMap;
 import java.util.Map;
 

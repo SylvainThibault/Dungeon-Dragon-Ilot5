@@ -1,4 +1,4 @@
-package game.defense;
+package game.items.defense;
 
 public class Shield extends Defense{
 }

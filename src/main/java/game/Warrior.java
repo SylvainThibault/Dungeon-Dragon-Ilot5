@@ -1,6 +1,6 @@
 package game;
 
-import game.attack.Weapon;
+import game.items.attack.Weapon;
 
 public class Warrior extends Perso {
     private Weapon weapon;

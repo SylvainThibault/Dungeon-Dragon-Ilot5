@@ -1,9 +1,9 @@
 package game;
 
-import game.attack.Weapon;
+import game.items.attack.Weapon;
 import java.util.InputMismatchException;
 import java.util.Map;
-import game.attack.Spell;
+import game.items.attack.Spell;
 
 import java.util.Scanner;
 

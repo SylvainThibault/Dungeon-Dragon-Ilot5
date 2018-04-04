@@ -1,6 +1,6 @@
 package game;
 
-import game.attack.Spell;
+import game.items.attack.Spell;
 
 public class Wizard extends Perso {
     private Spell spell;
