@@ -2,6 +2,4 @@ target/
 .idea/
 hello.iml
 src/main/java/game/test/
-src/main/java/game/Enemy.java
-src/main/java/game/Weapon.java
 
