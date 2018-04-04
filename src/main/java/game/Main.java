@@ -1,5 +1,8 @@
 package game;
 
+import game.attack.Weapon;
+import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -69,10 +72,12 @@ public class Main {
         System.out.println("Choose the name  : ");
         String newName = sc.nextLine();
         warrior1.setName(newName);
+        warrior1.setWeapon(choseWeapon());
 
         //Affiche le nom du personnage
         System.out.println("***********************************************");
-        System.out.println("Your warrior " + warrior1.getName() + " has been created");
+        System.out.println("Your warrior " + warrior1.getName() + " has been created\n" +
+                "He is armed with a " + warrior1.getWeapon().getName());
         System.out.println("***********************************************");
         System.out.println("Do you want to create another character  :\n1.Yes or \n2.No ");
         String choiceCreate;
@@ -102,6 +107,25 @@ public class Main {
             createCharacter();
         } else {
             playDice();
+        }
+    }
+
+    private static Weapon choseWeapon(){
+        Map<Integer,Weapon> weaponMap= Weapon.getWeapons();
+        System.out.println("Choose a weapon");
+        for( Map.Entry<Integer, Weapon> entry : weaponMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue().getName());
+        }
+        try {
+            int armeId = sc.nextInt();
+            if (armeId < 1 || armeId >3){
+                throw new InputMismatchException();
+            }
+            return weaponMap.get(armeId);
+        } catch (InputMismatchException | ClassCastException e){
+            System.out.println("Wrong Entry");
+            sc.nextLine();
+            return choseWeapon();
         }
     }
 }
