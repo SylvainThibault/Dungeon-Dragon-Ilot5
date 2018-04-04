@@ -1,5 +1,10 @@
 package game;
 
+import game.attack.Weapon;
+import java.util.InputMismatchException;
+import java.util.Map;
+import game.attack.Spell;
+
 import java.util.Scanner;
 
 /**
@@ -17,7 +22,6 @@ public class Main {
 
     public static void main(String[] args) {
         createCharacter();
-
         Board newGame = new Board();
         Boolean endGame = true;
         while (endGame) {
@@ -53,10 +57,12 @@ public class Main {
         System.out.println("Choose the name  : ");
         String newName = sc.nextLine();
         warrior1.setName(newName);
+        warrior1.setWeapon(choseWeapon());
 
         //Affiche le nom du personnage
         System.out.println("***********************************************");
-        System.out.println("Your warrior " + warrior1.getName() + " has been created");
+        System.out.println("Your warrior " + warrior1.getName() + " has been created\n" +
+                "He is armed with a " + warrior1.getWeapon().getName());
         System.out.println("***********************************************");
         System.out.println("Do you want to create another character  :\n1.Yes or \n2.No ");
         String choiceCreate;
@@ -75,9 +81,11 @@ public class Main {
         System.out.println("Choose the name  : ");
         String newName = sc.nextLine();
         wizard1.setName(newName);
+        wizard1.setSpell(choseSpell());
         //Affiche le nom du personnage créé avec le message "personnage créé"
         System.out.println("***********************************************");
-        System.out.println("Your wizard " + wizard1.getName() + " has been created");
+        System.out.println("Your wizard " + wizard1.getName() + " has been created\n" +
+                "he can launch the spell " + wizard1.getSpell().getName());
         System.out.println("***********************************************");
         System.out.println("Do you want to create another character  :\n1.Yes or \n2.No ");
         String choiceCreate;
@@ -105,6 +113,47 @@ public class Main {
             System.out.println("You typed : " + yesNoAnswer);
         }
         return false;
+    }
+
+
+
+    private static Spell choseSpell(){
+        Map<Integer,Spell> spellMap= Spell.getSpell();
+        System.out.println("Choose a spell");
+        for( Map.Entry<Integer, Spell> entry : spellMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue().getName());
+        }
+        try {
+            int spellId = sc.nextInt();
+//            sc.nextLine();
+            if (spellId < 1 || spellId >3){
+                throw new InputMismatchException();
+            }
+            return spellMap.get(spellId);
+        } catch (InputMismatchException e){
+            System.out.println("Wrong Entry");
+            sc.nextLine();
+            return choseSpell();
+        }
+    }
+
+    private static Weapon choseWeapon(){
+        Map<Integer,Weapon> weaponMap= Weapon.getWeapons();
+        System.out.println("Choose a weapon");
+        for( Map.Entry<Integer, Weapon> entry : weaponMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue().getName());
+        }
+        try {
+            int armeId = sc.nextInt();
+            if (armeId < 1 || armeId >3){
+                throw new InputMismatchException();
+            }
+            return weaponMap.get(armeId);
+        } catch (InputMismatchException e){
+            System.out.println("Wrong Entry");
+            sc.nextLine();
+            return choseWeapon();
+        }
     }
 }
 

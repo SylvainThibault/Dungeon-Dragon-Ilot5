@@ -1,13 +1,15 @@
 package game;
 
+import game.attack.Weapon;
+
 public class Warrior extends Perso {
-    private String weapon;
+    private Weapon weapon;
     private int shield;
 
 
     //ACCESSEURS//
 
-    public String getWeapon() {
+    public Weapon getWeapon() {
         return this.weapon;
     }
 
@@ -17,7 +19,7 @@ public class Warrior extends Perso {
 
     // MUTATEURS//
 
-    public void setWeapon(String Weapon){
+    public void setWeapon(Weapon Weapon){
         this.weapon = Weapon;
     }
 
