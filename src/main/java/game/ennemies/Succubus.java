@@ -2,7 +2,7 @@ package game.ennemies;
 
 import game.Perso;
 import game.Warrior;
-import game.attack.Weapon;
+import game.items.attack.Weapon;
 
 public class Succubus extends Enemy {
 

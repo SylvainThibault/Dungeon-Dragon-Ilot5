@@ -14,6 +14,11 @@ public class Bonus extends PowerUp{
     public Bonus(String name, int bonus) {
 
         super(name);
-        this.bonus = bonus;
+        this.setBonus(bonus);
+    }
+
+    @Override
+    public String toString() {
+        return "name: " + this.getName() + ", bonus: " + this.getBonus();
     }
 }
