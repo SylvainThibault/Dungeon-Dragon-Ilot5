@@ -3,8 +3,9 @@ package game;
 import game.attack.Weapon;
 import java.util.InputMismatchException;
 import java.util.Map;
+import game.attack.Spell;
+
 import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * The type Main.
@@ -20,31 +21,17 @@ public class Main {
 
 
     public static void main(String[] args) {
-        playDice();
         createCharacter();
-    }
-
-    public static Integer rollDice() {
-        Integer randomNum = ThreadLocalRandom.current().nextInt(1, 7);
-        return randomNum;
-    }
-
-    public static void playDice() {
-        char diceYesNo = 'y';
-        System.out.println("Do you want to roll the dice ? (y/whatever)");
-        try {
-            diceYesNo = sc.nextLine().charAt(0);
-        } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("!!! On a dit 'y' ou 'n' bouletto !!!\n");
-            playDice();
+        choseSpell();
+        Board newGame = new Board();
+        Boolean endGame = true;
+        while (endGame) {
+            Scanner sc = new Scanner(System.in);
+            String test = sc.nextLine();
+            if (!newGame.playTurn()) {
+                endGame = exitGame();
+            }
         }
-        if (diceYesNo == 'y') {
-            System.out.println(rollDice());
-            playDice();
-        } else {
-            return;
-        }
-
     }
 
     public static void createCharacter() {
@@ -56,7 +43,6 @@ public class Main {
             System.out.println("You chose to create a warrior");
             createWarrior();
         }
-
         if (choiceCharacter.equals("2")) {
             System.out.println("You chose to create a wizard");
             createWizard();
@@ -85,7 +71,7 @@ public class Main {
         if (choiceCreate.equals("1")) {
             createCharacter();
         } else {
-            playDice();
+            System.out.println("Start Playing!");
         }
     }
 
@@ -106,7 +92,47 @@ public class Main {
         if (choiceCreate.equals("1")) {
             createCharacter();
         } else {
-            playDice();
+            System.out.println("Start Playing!");
+        }
+    }
+
+    public static Boolean exitGame() {
+        char yesNoAnswer = 'o';
+        while (yesNoAnswer != 'y') {
+            System.out.println("Do you want to exit Game ? (y/n)");
+            try {
+                Scanner sc = new Scanner(System.in);
+                yesNoAnswer = sc.nextLine().charAt(0);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("No answer, please try again :");
+            }
+            if (yesNoAnswer == 'n') {
+                System.out.println("Please exit the game");
+            }
+            System.out.println("You typed : " + yesNoAnswer);
+        }
+        return false;
+    }
+
+
+
+    private static Spell choseSpell(){
+        Map<Integer,Spell> spellMap= Spell.getSpell();
+        System.out.println("Choose a spell");
+        for( Map.Entry<Integer, Spell> entry : spellMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue().getName());
+        }
+        try {
+            int spellId = sc.nextInt();
+//            sc.nextLine();
+            if (spellId < 1 || spellId >3){
+                throw new InputMismatchException();
+            }
+            return spellMap.get(spellId);
+        } catch (InputMismatchException e){
+            System.out.println("Wrong Entry");
+            sc.nextLine();
+            return choseSpell();
         }
     }
 
