@@ -6,7 +6,6 @@ public class Warrior extends Perso {
     private Weapon weapon;
     private int shield;
 
-
     //ACCESSEURS//
 
     public Weapon getWeapon() {
