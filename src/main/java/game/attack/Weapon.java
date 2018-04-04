@@ -1,7 +1,5 @@
 package game.attack;
 
-import game.Enemy;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,17 +7,6 @@ public class Weapon extends Attack {
 
     Weapon(String name, int level){
         super(name, level);
-    }
-
-    public int getDamage(Enemy enemy) {
-        if(this.getName().equals("arc")){
-            if (enemy.getName().toLowerCase().equals("dragon")){
-                return 50;
-            } else if (enemy.getName().toLowerCase().equals("succube")){
-                return 25;
-            }
-        }
-        return this.getLevel();
     }
 
     public static Map<Integer, Weapon> getWeapons() {

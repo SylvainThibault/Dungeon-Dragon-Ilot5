@@ -1,13 +1,15 @@
 package game;
 
+import game.attack.Spell;
+
 public class Wizard extends Perso {
-    private String spell;
+    private Spell spell;
     private int philter;
 
 
     //ACCESSEURS//
 
-    public String getSpell() {
+    public Spell getSpell() {
         return this.spell;
     }
 
@@ -17,7 +19,7 @@ public class Wizard extends Perso {
 
     // MUTATEURS//
 
-    public void setSpell(String Spell) {
+    public void setSpell(Spell Spell) {
         this.spell = Spell;
     }
 
@@ -27,6 +29,6 @@ public class Wizard extends Perso {
 
     // Méthode toString : Affiche les informations d'un objet
     public String toString() {
-        return super.toString() + "\nSpell : " + spell + "\nPhilter : " + philter;
+        return super.toString() + "\nSpell : " + spell.toString() + "\nPhilter : " + philter;
     }
 }

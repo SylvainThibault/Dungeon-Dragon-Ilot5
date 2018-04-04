@@ -22,7 +22,6 @@ public class Main {
 
     public static void main(String[] args) {
         createCharacter();
-        choseSpell();
         Board newGame = new Board();
         Boolean endGame = true;
         while (endGame) {
@@ -82,9 +81,11 @@ public class Main {
         System.out.println("Choose the name  : ");
         String newName = sc.nextLine();
         wizard1.setName(newName);
+        wizard1.setSpell(choseSpell());
         //Affiche le nom du personnage créé avec le message "personnage créé"
         System.out.println("***********************************************");
-        System.out.println("Your wizard " + wizard1.getName() + " has been created");
+        System.out.println("Your wizard " + wizard1.getName() + " has been created\n" +
+                "he can launch the spell " + wizard1.getSpell().getName());
         System.out.println("***********************************************");
         System.out.println("Do you want to create another character  :\n1.Yes or \n2.No ");
         String choiceCreate;
