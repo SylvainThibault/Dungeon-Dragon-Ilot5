@@ -19,11 +19,12 @@ public class Board {
      * The Current square.
      */
     public int currentSquare = 0;
+
     /**
      * The Squares.
      */
-    public Object Squares[] = new Object[64];
-    private static List<Enemy> enemies = new ArrayList<>();
+    public Object Squares[] = new Object[63];
+    private static ArrayList<Enemy> enemies = new ArrayList<>();
 
 
     /**
@@ -43,6 +44,11 @@ public class Board {
     public void setCurrentSquare(int currentSquare) {
         this.currentSquare = currentSquare;
     }
+
+    public Object[] getSquares() {
+        return Squares;
+    }
+
 
     public Boolean playTurn() {
         int getCurrentSquare = this.getCurrentSquare();
@@ -72,7 +78,7 @@ public class Board {
         return randomNum;
     }
 
-    public static void createEnnemies() {
+    public static ArrayList createEnnemies() {
         int[] dragAttack = {80, 60, 40, 30, 20, 15};
         int[] otherAttack = {75, 50, 25, 15};
 
@@ -87,9 +93,20 @@ public class Board {
         for (int i = 0; i < 4; i++) {
             enemies.add(new Succubus("Succ" + i, otherAttack[i]));
         }
+        return enemies;
+    }
 
-        for (Enemy enemy : enemies) {
-            System.out.println(enemy.toString());
+    public void randomizeSquareContent(ArrayList contentArray) {
+        int numberOfItems = contentArray.size();
+        while (numberOfItems > 0) {
+            Integer randomNum = ThreadLocalRandom.current().nextInt(0, 63);
+            if (this.Squares[randomNum] == null) {
+                this.Squares[randomNum] = contentArray.get(numberOfItems-1);
+                numberOfItems--;
+            }
+        }
+        for(int i = 0 ; i < Squares.length ; i++) {
+            System.out.println("Case n°" + (i+1) + " : " +Squares[i]);
         }
     }
 }

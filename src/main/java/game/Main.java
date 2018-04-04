@@ -1,11 +1,10 @@
 package game;
 
 import game.items.attack.Weapon;
-import java.util.InputMismatchException;
-import java.util.Map;
-import game.items.attack.Spell;
 
-import java.util.Scanner;
+import java.util.*;
+
+import game.items.attack.Spell;
 
 /**
  * The type Main.
@@ -22,15 +21,16 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Board.createEnnemies();
         character = createCharacter();
         newGame();
     }
 
     private static Boolean newGame() {
-        System.out.println("Let's go!");
         Board newGame = new Board();
+        ArrayList enemiesList = newGame.createEnnemies();
+        newGame.randomizeSquareContent(enemiesList);
         Boolean endGame = true;
+        System.out.println("Let's go! (type 'return' to move forward");
         while (endGame) {
             Scanner sc = new Scanner(System.in);
             String test = sc.nextLine();
