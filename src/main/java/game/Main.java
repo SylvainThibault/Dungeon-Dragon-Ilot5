@@ -122,7 +122,7 @@ public class Main {
                 throw new InputMismatchException();
             }
             return weaponMap.get(armeId);
-        } catch (InputMismatchException | ClassCastException e){
+        } catch (InputMismatchException e){
             System.out.println("Wrong Entry");
             sc.nextLine();
             return choseWeapon();
