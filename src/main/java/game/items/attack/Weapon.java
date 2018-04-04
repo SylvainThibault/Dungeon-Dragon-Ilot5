@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Weapon extends Attack {
 
-    Weapon(String name, int level){
+    public Weapon(String name, int level){
         super(name, level);
     }
 

@@ -6,12 +6,9 @@ public abstract class Attack extends Item{
 
     private int level;
 
-    Attack(){
-    }
-
-    Attack(String name, int level){
-        this.setName(name);
-        this.setLevel(level);
+    public Attack(String name, int level) {
+        super(name);
+        this.level = level;
     }
 
     /**
