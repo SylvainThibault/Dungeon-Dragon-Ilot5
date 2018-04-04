@@ -22,6 +22,10 @@ public class Main {
 
     public static void main(String[] args) {
         createCharacter();
+        newGame();
+    }
+
+    private static void newGame() {
         Board newGame = new Board();
         Boolean endGame = true;
         while (endGame) {
@@ -99,16 +103,16 @@ public class Main {
 
     public static Boolean exitGame() {
         char yesNoAnswer = 'o';
-        while (yesNoAnswer != 'y') {
-            System.out.println("Do you want to exit Game ? (y/n)");
+        while (yesNoAnswer != '1') {
+            System.out.println("Do you want to \n1. exit or \n2. start a new Game ?");
             try {
                 Scanner sc = new Scanner(System.in);
                 yesNoAnswer = sc.nextLine().charAt(0);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("No answer, please try again :");
             }
-            if (yesNoAnswer == 'n') {
-                System.out.println("Please exit the game");
+            if (yesNoAnswer == '2') {
+                newGame();
             }
             System.out.println("You typed : " + yesNoAnswer);
         }
