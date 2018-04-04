@@ -13,7 +13,12 @@ public class Malus extends PowerUp{
 
     public Malus(String name, int malus) {
         super(name);
-        this.malus = malus;
+        this.setMalus(malus);
 
     }
+    @Override
+    public String toString() {
+        return "name: " + this.getName() + ", malus: " + this.getMalus();
+    }
+
 }
