@@ -1,9 +1,9 @@
-package game.attack;
+package game.items.attack;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Spell extends Attack {
-    Spell(String name,int level){
+    public Spell(String name,int level){
         super(name,level);
     }
 

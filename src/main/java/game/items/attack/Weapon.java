@@ -1,11 +1,11 @@
-package game.attack;
+package game.items.attack;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Weapon extends Attack {
 
-    Weapon(String name, int level){
+    public Weapon(String name, int level){
         super(name, level);
     }
 

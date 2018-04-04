@@ -1,9 +1,9 @@
 package game;
 
-import game.attack.Weapon;
+import game.items.attack.Weapon;
 import java.util.InputMismatchException;
 import java.util.Map;
-import game.attack.Spell;
+import game.items.attack.Spell;
 
 import java.util.Scanner;
 
@@ -11,7 +11,8 @@ import java.util.Scanner;
  * The type Main.
  */
 public class Main {
-    static Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
+    private static Perso character;
 
     /**
      * The entry point of application.
@@ -22,7 +23,7 @@ public class Main {
 
     public static void main(String[] args) {
         Board.createEnnemies();
-        createCharacter();
+        character = createCharacter();
         newGame();
     }
 
@@ -39,23 +40,25 @@ public class Main {
         } return endGame;
     }
 
-    public static void createCharacter() {
+    private static Perso createCharacter() {
         String choiceCharacter;
         System.out.println("Choose your character : \n1.Warrior or \n2.Wizard");
         choiceCharacter = sc.nextLine();
 
         if (choiceCharacter.equals("1")) {
             System.out.println("You chose to create a warrior");
-            createWarrior();
+            return createWarrior();
         }
         if (choiceCharacter.equals("2")) {
             System.out.println("You chose to create a wizard");
-            createWizard();
+            return createWizard();
         }
+        System.out.println("Wrong Entry");
+        return createCharacter();
     }
 
 
-    public static void createWarrior() {
+    private static Warrior createWarrior() {
         //************** création du personnage*****************//
         Warrior warrior1 = new Warrior();
 
@@ -70,18 +73,14 @@ public class Main {
         System.out.println("Your warrior " + warrior1.getName() + " has been created\n" +
                 "He is armed with a " + warrior1.getWeapon().getName());
         System.out.println("***********************************************");
-        System.out.println("Do you want to create another character  :\n1.Yes or \n2.No ");
-        String choiceCreate;
-        choiceCreate = sc.nextLine();
-        if (choiceCreate.equals("1")) {
-            createCharacter();
-        } else {
-            System.out.println("Start Playing!");
-        }
+
+        System.out.println("Start Playing!");
+
+        return warrior1;
     }
 
 
-    public static void createWizard() {
+    private static Wizard createWizard() {
 
         Wizard wizard1 = new Wizard();
         System.out.println("Choose the name  : ");
@@ -93,17 +92,13 @@ public class Main {
         System.out.println("Your wizard " + wizard1.getName() + " has been created\n" +
                 "he can launch the spell " + wizard1.getSpell().getName());
         System.out.println("***********************************************");
-        System.out.println("Do you want to create another character  :\n1.Yes or \n2.No ");
-        String choiceCreate;
-        choiceCreate = sc.nextLine();
-        if (choiceCreate.equals("1")) {
-            createCharacter();
-        } else {
-            System.out.println("Start Playing!");
-        }
+
+        System.out.println("Start Playing!");
+
+        return wizard1;
     }
 
-    public static Boolean exitGame() {
+    private static Boolean exitGame() {
         char yesNoAnswer = 'o';
         while (yesNoAnswer != '1') {
             System.out.println("Do you want to \n1. exit or \n2. start a new Game ?");

@@ -1,36 +1,15 @@
-package game.attack;
+package game.items.attack;
 
-public abstract class Attack {
+import game.items.Item;
 
-    private String name;
+public abstract class Attack extends Item{
+
     private int level;
 
-    /**
-     * Name Getter
-     * @return Name of the weapon / spell
-     */
-
-    Attack(){
+    public Attack(String name, int level) {
+        super(name);
+        this.level = level;
     }
-
-    Attack(String name, int level){
-        this.setName(name);
-        this.setLevel(level);
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * Name Setter
-     * @param name name of the weapon
-     */
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 
     /**
      * Getter of the level attribute
