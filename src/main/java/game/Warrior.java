@@ -6,6 +6,18 @@ public class Warrior extends Perso {
     private Weapon weapon;
     private int shield;
 
+    public Warrior(String name, Weapon weapon, int shield) {
+        super(name);
+        this.weapon = weapon;
+        this.shield = shield;
+    }
+
+    public Warrior(String name, Weapon weapon) {
+        super(name);
+        this.weapon = weapon;
+        this.shield = 0;
+    }
+
     //ACCESSEURS//
 
     public Weapon getWeapon() {

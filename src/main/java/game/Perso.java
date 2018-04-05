@@ -9,6 +9,12 @@ public abstract class Perso {
     private String image;
     private int armor;
 
+    public Perso(String name) {
+        this.name = name;
+        setPower(15);
+        setLife(100);
+    }
+
     //Accesseurs//
 
     //Return variable
@@ -35,24 +41,24 @@ public abstract class Perso {
     //mutateurs//
 
     // Définit variable
-    public void setName(String Name){
-        this.name = Name;
+    public void setName(String name){
+        this.name = name;
     }
 
-    public void setPower(int Power){
-        this.power = 15;
+    public void setPower(int power){
+        this.power = power;
     }
 
-    public void setLife(int Life){
-        this.life = 100;
+    public void setLife(int life){
+        this.life = life;
     }
 
-    public void setImage(String Image){
-        this.image = Image;
+    public void setImage(String image){
+        this.image = image;
     }
 
-    public void setArmor(int Armor){
-        this.armor = Armor;
+    public void setArmor(int armor){
+        this.armor = armor;
     }
 
     public String toString(){
