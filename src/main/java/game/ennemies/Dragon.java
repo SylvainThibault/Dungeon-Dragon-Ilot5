@@ -21,9 +21,10 @@ public class Dragon extends Enemy {
     }
 
     @Override
-    public void fight(Perso perso){
+    public Boolean fight(Perso perso){
         if( perso instanceof Wizard){
             System.out.println("fight Wizard");
         }
+        return null;
     }
 }

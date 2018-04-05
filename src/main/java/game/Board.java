@@ -79,7 +79,7 @@ public class Board {
             System.out.println(newCurrentSquare.toString());
 
             if (newCurrentSquare instanceof Bonus) {
-                if (newCurrentSquareIndex <= (boardSize - ((Bonus) newCurrentSquare).getBonus())){
+                if (newCurrentSquareIndex <= (boardSize - ((Bonus) newCurrentSquare).getBonus())) {
                     newCurrentSquareIndex += ((Bonus) newCurrentSquare).getBonus();
                     this.setCurrentSquare(newCurrentSquareIndex);
                 } else {
@@ -93,8 +93,19 @@ public class Board {
                 newCurrentSquareIndex -= ((Malus) newCurrentSquare).getMalus();
                 this.setCurrentSquare(newCurrentSquareIndex);
             }
-            if (newCurrentSquare instanceof Enemy){
-                ((Enemy) newCurrentSquare).fight(player);
+
+            if (newCurrentSquare instanceof Enemy) {
+                Boolean fightResult = ((Enemy) newCurrentSquare).fight(player);
+                if(fightResult == null){
+                    return true;
+                }
+                if(fightResult){
+                    newCurrentSquareIndex += 2;
+                    this.setCurrentSquare(newCurrentSquareIndex);
+                    return true;
+                }
+                newCurrentSquareIndex -= 2;
+                this.setCurrentSquare(newCurrentSquareIndex);
             }
         }
         return true;

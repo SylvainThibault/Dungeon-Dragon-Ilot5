@@ -2,7 +2,7 @@ package game.ennemies;
 
 import game.Perso;
 
-public class Enemy {
+public abstract class Enemy {
 
     private String name;
     private int attack;
@@ -50,7 +50,5 @@ public class Enemy {
                 '}';
     }
 
-    public void fight(Perso perso) {
-        System.out.println("FIIIIIIIIIIIIIIIIIIIIIGHT!!!!!!!!!!!");
-    }
+    public abstract Boolean fight(Perso perso);
 }
