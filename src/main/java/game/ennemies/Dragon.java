@@ -25,6 +25,6 @@ public class Dragon extends Enemy {
         if( perso instanceof Wizard){
             System.out.println("fight Wizard");
         }
-        return true;
+        return null;
     }
 }

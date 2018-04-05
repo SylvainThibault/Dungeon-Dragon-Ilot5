@@ -2,6 +2,7 @@ package game.ennemies;
 
 import game.Perso;
 import game.Warrior;
+import game.Wizard;
 import game.items.attack.Weapon;
 
 public class Succubus extends Enemy {
@@ -11,15 +12,20 @@ public class Succubus extends Enemy {
     }
 
     @Override
-    public void fight(Perso perso) {
+    public Boolean fight(Perso perso) {
         if (perso instanceof Warrior) {
-            Weapon currentWeapon = ((Warrior) perso).getWeapon();
-            int currentWeaponLevel = currentWeapon.getLevel(this) / 2;
-            int persoStrength = currentWeaponLevel + perso.getPower();
-            int enemyStrength = this.getAttack();
-            System.out.println("Original weapon strength : " + currentWeapon.getLevel(this));
-            System.out.println("Current weapon strength : " + currentWeaponLevel);
-            System.out.println("Perso strength : " + persoStrength + " // " + enemyStrength + " : Enemy strength");
+
+            int weaponLevel = ((Warrior) perso).getWeapon().getLevel(this) / 2;
+            int persoPower = weaponLevel + perso.getPower();
+
+            int degat = persoPower + weaponLevel;
+            int lifeEnemy = this.getLife();
+            System.out.println("Perso strength : " + degat + " // " + lifeEnemy + " : Enemy's life");
+
+            lifeEnemy = lifeEnemy - degat;
+
+            return fightResult(lifeEnemy, perso);
         }
+        return null;
     }
 }
