@@ -1,5 +1,6 @@
 package game.items;
 
+import game.items.attack.AttackLevel;
 import game.items.attack.Spell;
 import game.items.attack.Weapon;
 import game.items.defense.Philter;
@@ -21,10 +22,10 @@ public class ItemGenerator {
         items.add( new Philter("small philter", 2));
         items.add( new Philter("philter", 3));
         items.add( new Philter("large philter", 5));
-        items.add( new Spell("indignation", 50));
-        items.add( new Spell("teamEric", 100));
-        items.add( new Weapon("frostmourne", 50));
-        items.add( new Weapon("soul edge", 60));
+        items.add( new Spell("indignation", new AttackLevel(50)));
+        items.add( new Spell("teamEric", new AttackLevel(100)));
+        items.add( new Weapon("frostmourne", new AttackLevel(50)));
+        items.add( new Weapon("soul edge", new AttackLevel(60)));
         items.add( new Malus("carton rouge", 5));
         items.add( new Malus("boule noire", 5));
         items.add( new Bonus("drop the mic", 5));
