@@ -15,7 +15,7 @@ public class Succubus extends Enemy {
     public Boolean fight(Perso perso) {
         if (perso instanceof Warrior) {
 
-            int weaponLevel = ((Warrior) perso).getWeapon().getLevel(this) / 2;
+            int weaponLevel = perso.getBonusDamage(this) / 2;
             int persoPower = weaponLevel + perso.getPower();
 
             int degat = persoPower + weaponLevel;

@@ -13,7 +13,7 @@ public class Sorcerer extends Enemy {
     public Boolean fight(Perso perso){
         if( perso instanceof Wizard){
             int persoPower = perso.getPower();
-            int spellLevel=((Wizard) perso).getSpell().getLevel(this);
+            int spellLevel=perso.getBonusDamage(this);
             int degat = persoPower+spellLevel;
             int lifeEnemy =this.getLife();
             System.out.println("puissance d'attaque " + degat);
