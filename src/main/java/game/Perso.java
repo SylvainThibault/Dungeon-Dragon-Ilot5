@@ -4,7 +4,7 @@ public abstract class Perso {
 
     //Stocke variable
     private String name;
-    private int power;
+    private int power = 15 ;
     private int life;
     private String image;
     private int armor;

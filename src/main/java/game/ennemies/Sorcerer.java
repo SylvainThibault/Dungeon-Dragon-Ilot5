@@ -9,9 +9,14 @@ public class Sorcerer extends Enemy {
         super(name, attack);
     }
 
+@Override
     public void fight(Perso perso){
         if( perso instanceof Wizard){
-            System.out.println("fight Wizard");
+            int persoPower = perso.getPower();
+            int spellLevel=((Wizard) perso).getSpell().getLevel();
+            int degat = persoPower+spellLevel;
+            System.out.println(degat);
+            System.out.println(this.getAttack());
         }
     }
 }
