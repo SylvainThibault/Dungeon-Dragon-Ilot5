@@ -6,6 +6,7 @@ import game.ennemies.Enemy;
 import game.ennemies.Sorcerer;
 import game.ennemies.Succubus;
 import game.items.powerup.Bonus;
+import game.items.powerup.Joker;
 import game.items.powerup.Malus;
 
 import java.lang.reflect.Array;
@@ -94,12 +95,20 @@ public class Board {
                 this.setCurrentSquare(newCurrentSquareIndex);
             }
 
+            if(newCurrentSquare instanceof Joker){
+                int bonusLife = ((Joker) newCurrentSquare).getBonusLife();
+                int newPlayerLife = player.getLife() + bonusLife;
+                player.setLife(newPlayerLife);
+                System.out.println("Congratulations ! You've earned " + bonusLife + " bonus life. Your new life is set to : " + player.getLife());
+                return true;
+            }
+
             if (newCurrentSquare instanceof Enemy) {
                 Boolean fightResult = ((Enemy) newCurrentSquare).fight(player);
                 if(fightResult == null){
                     System.out.println("You lost the game");
                     System.out.println("You will never be a Eric\n");
-                    return false;
+                    return true;
                 }
                 if(fightResult){
                     newCurrentSquareIndex += 2;
