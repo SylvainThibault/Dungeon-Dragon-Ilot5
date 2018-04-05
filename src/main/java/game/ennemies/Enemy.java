@@ -36,4 +36,8 @@ public class Enemy {
                 ", attack=" + attack +
                 '}';
     }
+
+    public void fight() {
+        System.out.println("FIIIIIIIIIIIIIIIIIIIIIGHT!!!!!!!!!!!");
+    }
 }
