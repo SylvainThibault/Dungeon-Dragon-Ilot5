@@ -6,8 +6,19 @@ public class Enemy {
 
     private String name;
     private int attack;
+    private int life;
 
-    public Enemy(String name, int attack) {
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public Enemy(String name, int attack, int life) {
+        this.life = life;
         this.name = name;
         this.attack = attack;
     }

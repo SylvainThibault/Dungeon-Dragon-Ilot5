@@ -28,6 +28,7 @@ public class Board {
     public Object Squares[] = new Object[63];
     private static ArrayList<Enemy> enemies = new ArrayList<>();
 
+    private int boardSize = Squares.length;
 
     /**
      * Gets current square.
@@ -67,7 +68,7 @@ public class Board {
         try {
             newCurrentSquare = this.Squares[newCurrentSquareIndex];
         } catch (Exception e) {
-            this.setCurrentSquare(63);
+            this.setCurrentSquare(boardSize);
             System.out.println("You reached the last square");
             return false;
         }
@@ -78,9 +79,16 @@ public class Board {
             System.out.println(newCurrentSquare.toString());
 
             if (newCurrentSquare instanceof Bonus) {
-                newCurrentSquareIndex += ((Bonus) newCurrentSquare).getBonus();
-                this.setCurrentSquare(newCurrentSquareIndex);
+                if (newCurrentSquareIndex <= (boardSize - ((Bonus) newCurrentSquare).getBonus())){
+                    newCurrentSquareIndex += ((Bonus) newCurrentSquare).getBonus();
+                    this.setCurrentSquare(newCurrentSquareIndex);
+                } else {
+                    this.setCurrentSquare(boardSize);
+                    System.out.println("You reached the last square");
+                    return false;
+                }
             }
+
             if (newCurrentSquare instanceof Malus) {
                 newCurrentSquareIndex -= ((Malus) newCurrentSquare).getMalus();
                 this.setCurrentSquare(newCurrentSquareIndex);
@@ -104,18 +112,21 @@ public class Board {
 
     public ArrayList createEnnemies() {
         int[] dragAttack = {80, 60, 40, 30, 20, 15};
-        int[] otherAttack = {75, 50, 25, 15};
+        int[] otherAttack = {40, 50, 25, 15};
+
+        int[] dragLife = {80, 60, 40, 30, 20, 15};
+        int[] otherLife = {40, 50, 25, 15};
 
         for (int i = 0; i < 6; i++) {
-            enemies.add(new Dragon("Drago" + i, dragAttack[i], 1));
+            enemies.add(new Dragon("Drago" + i, dragAttack[i], dragLife[i], 1));
         }
 
         for (int i = 0; i < 4; i++) {
-            enemies.add(new Sorcerer("Sorcerer" + i, otherAttack[i]));
+            enemies.add(new Sorcerer("Sorcerer" + i, otherAttack[i], otherLife[i]));
         }
 
         for (int i = 0; i < 4; i++) {
-            enemies.add(new Succubus("Succ" + i, otherAttack[i]));
+            enemies.add(new Succubus("Succ" + i, otherAttack[i], otherLife[i]));
         }
         return enemies;
     }
@@ -123,7 +134,7 @@ public class Board {
     public void randomizeSquareContent(ArrayList contentArray) {
         int numberOfItems = contentArray.size();
         while (numberOfItems > 0) {
-            Integer randomNum = ThreadLocalRandom.current().nextInt(0, 63);
+            Integer randomNum = ThreadLocalRandom.current().nextInt(0, boardSize);
             if (this.Squares[randomNum] == null) {
                 this.Squares[randomNum] = contentArray.get(numberOfItems - 1);
                 numberOfItems--;
