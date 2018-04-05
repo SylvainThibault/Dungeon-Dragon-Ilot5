@@ -5,6 +5,8 @@ import game.ennemies.Dragon;
 import game.ennemies.Enemy;
 import game.ennemies.Sorcerer;
 import game.ennemies.Succubus;
+import game.items.powerup.Bonus;
+import game.items.powerup.Malus;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -43,6 +45,7 @@ public class Board {
      */
     public void setCurrentSquare(int currentSquare) {
         this.currentSquare = currentSquare;
+        System.out.println("Your Character is now at Square n°" + currentSquare);
     }
 
     public Object[] getSquares() {
@@ -51,24 +54,41 @@ public class Board {
 
 
     public Boolean playTurn() {
+
         int getCurrentSquare = this.getCurrentSquare();
         System.out.println("current square : " + currentSquare);
+
         int diceResult = diceResult();
         System.out.println("dice result : " + diceResult);
-        int newCurrentSquare = getCurrentSquare + diceResult;
 
-        if (newCurrentSquare >= 63) {
+        int newCurrentSquareIndex = getCurrentSquare + diceResult;
+        Object newCurrentSquare;
+
+        try {
+            newCurrentSquare = this.Squares[newCurrentSquareIndex];
+        } catch (Exception e) {
             this.setCurrentSquare(63);
             System.out.println("You reached the last square");
             return false;
-        } else {
-            this.setCurrentSquare(newCurrentSquare);
-            System.out.println("Your Character is now at Square n°" + currentSquare);
-            if (this.Squares[newCurrentSquare] != null) {
-                System.out.println(this.Squares[newCurrentSquare].toString());
-            }
-            return true;
         }
+
+        this.setCurrentSquare(newCurrentSquareIndex);
+
+        if (newCurrentSquare != null) {
+            System.out.println(newCurrentSquare.toString());
+            if (newCurrentSquare instanceof Bonus) {
+                newCurrentSquareIndex += 5;
+                this.setCurrentSquare(newCurrentSquareIndex);
+            }
+            if (newCurrentSquare instanceof Malus) {
+                newCurrentSquareIndex -= 5;
+                this.setCurrentSquare(newCurrentSquareIndex);
+            }
+            if (newCurrentSquare instanceof Enemy){
+                ((Enemy) newCurrentSquare).fight();
+            }
+        }
+        return true;
     }
 
     /**
@@ -104,7 +124,7 @@ public class Board {
         while (numberOfItems > 0) {
             Integer randomNum = ThreadLocalRandom.current().nextInt(0, 63);
             if (this.Squares[randomNum] == null) {
-                this.Squares[randomNum] = contentArray.get(numberOfItems-1);
+                this.Squares[randomNum] = contentArray.get(numberOfItems - 1);
                 numberOfItems--;
             }
         }
