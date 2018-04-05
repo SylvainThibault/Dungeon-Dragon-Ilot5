@@ -5,6 +5,9 @@ import game.ennemies.Dragon;
 import game.ennemies.Enemy;
 import game.ennemies.Sorcerer;
 import game.ennemies.Succubus;
+import game.items.attack.Attack;
+import game.items.attack.Spell;
+import game.items.attack.Weapon;
 import game.items.powerup.Bonus;
 import game.items.powerup.Joker;
 import game.items.powerup.Malus;
@@ -95,11 +98,23 @@ public class Board {
                 this.setCurrentSquare(newCurrentSquareIndex);
             }
 
-            if(newCurrentSquare instanceof Joker){
+            if (newCurrentSquare instanceof Joker){
                 int bonusLife = ((Joker) newCurrentSquare).getBonusLife();
                 int newPlayerLife = player.getLife() + bonusLife;
                 player.setLife(newPlayerLife);
                 System.out.println("Congratulations ! You've earned " + bonusLife + " bonus life. Your new life is set to : " + player.getLife());
+                return true;
+            }
+
+            if (newCurrentSquare instanceof Spell && player instanceof Wizard){
+                ((Wizard) player).setSpell((Spell) newCurrentSquare);
+                System.out.println("Congratulation ! Your new Spell is " + ((Spell) newCurrentSquare).getName());
+                return true;
+            }
+
+            if (newCurrentSquare instanceof Weapon && player instanceof Warrior){
+                ((Warrior) player).setWeapon((Weapon) newCurrentSquare);
+                System.out.println("Congratulation ! Your new Weapon is " + ((Weapon) newCurrentSquare).getName());
                 return true;
             }
 
