@@ -63,14 +63,14 @@ public class Main {
 
 
     private static Warrior createWarrior() {
-        //************** création du personnage*****************//
-        Warrior warrior1 = new Warrior();
 
-        //****************choix du nom************************************************//
+        //**************** choix du nom et de l'arme ************************************************//
         System.out.println("Choose the name  : ");
         String newName = sc.nextLine();
-        warrior1.setName(newName);
-        warrior1.setWeapon(choseWeapon());
+        Weapon newWeapon = choseWeapon();
+
+        //************** création du personnage*****************//
+        Warrior warrior1 = new Warrior(newName, newWeapon);
 
         //Affiche le nom du personnage
         System.out.println("***********************************************");
@@ -83,14 +83,16 @@ public class Main {
         return warrior1;
     }
 
-
     private static Wizard createWizard() {
 
-        Wizard wizard1 = new Wizard();
+        //**************** choix du nom et de l'arme ************************************************//
         System.out.println("Choose the name  : ");
         String newName = sc.nextLine();
-        wizard1.setName(newName);
-        wizard1.setSpell(choseSpell());
+        Spell newSpell = choseSpell();
+
+        //************** création du personnage*****************//
+        Wizard wizard1 = new Wizard(newName, newSpell);
+
         //Affiche le nom du personnage créé avec le message "personnage créé"
         System.out.println("***********************************************");
         System.out.println("Your wizard " + wizard1.getName() + " has been created\n" +
@@ -119,8 +121,6 @@ public class Main {
         }
         return false;
     }
-
-
 
     private static Spell choseSpell(){
         Map<Integer,Spell> spellMap= Spell.getSpell();

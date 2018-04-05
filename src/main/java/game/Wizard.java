@@ -6,6 +6,18 @@ public class Wizard extends Perso {
     private Spell spell;
     private int philter;
 
+    public Wizard(String name, Spell spell, int philter) {
+        super(name);
+        this.spell = spell;
+        this.philter = philter;
+    }
+
+    public Wizard(String name, Spell spell) {
+        super(name);
+        this.spell = spell;
+        this.philter = 0;
+    }
+
 
     //ACCESSEURS//
 
