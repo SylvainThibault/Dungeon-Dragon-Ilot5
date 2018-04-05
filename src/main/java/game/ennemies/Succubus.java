@@ -15,10 +15,11 @@ public class Succubus extends Enemy {
         if (perso instanceof Warrior) {
             Weapon currentWeapon = ((Warrior) perso).getWeapon();
             int currentWeaponLevel = currentWeapon.getLevel() / 2;
-
+            int persoStrength = currentWeaponLevel + perso.getPower();
+            int enemyStrength = this.getAttack();
             System.out.println("Original weapon strength : " + currentWeapon.getLevel());
             System.out.println("Current weapon strength : " + currentWeaponLevel);
-            System.out.println("fight Warrior");
+            System.out.println("Perso strength : " + persoStrength + " // " + enemyStrength + " : Enemy strength");
         }
     }
 }

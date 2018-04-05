@@ -112,10 +112,10 @@ public class Board {
 
     public ArrayList createEnnemies() {
         int[] dragAttack = {80, 60, 40, 30, 20, 15};
-        int[] otherAttack = {75, 50, 25, 15};
+        int[] otherAttack = {40, 50, 25, 15};
 
         int[] dragLife = {80, 60, 40, 30, 20, 15};
-        int[] otherLife = {75, 50, 25, 15};
+        int[] otherLife = {40, 50, 25, 15};
 
         for (int i = 0; i < 6; i++) {
             enemies.add(new Dragon("Drago" + i, dragAttack[i], dragLife[i], 1));
