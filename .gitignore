@@ -2,4 +2,3 @@ target/
 .idea/
 hello.iml
 src/main/java/game/test/
-classes/
