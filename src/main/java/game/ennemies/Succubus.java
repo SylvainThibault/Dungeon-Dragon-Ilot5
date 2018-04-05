@@ -24,19 +24,7 @@ public class Succubus extends Enemy {
 
             lifeEnemy = lifeEnemy - degat;
 
-            if (lifeEnemy <= 0) {
-                System.out.println("you win");
-                return true;
-            } else {
-                int persoLife = perso.getLife();
-                int attackEnemy = this.getAttack();
-                int changePersoLife = persoLife - attackEnemy;
-                System.out.println("you lose");
-                System.out.println(" life personnage " + persoLife);
-                perso.setLife(changePersoLife);
-                System.out.println("new life personnage " + changePersoLife);
-                return false;
-            }
+            return fightResult(lifeEnemy, perso);
         }
         return null;
     }
