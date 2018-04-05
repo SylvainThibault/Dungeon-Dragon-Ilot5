@@ -1,5 +1,6 @@
 package game;
 
+import game.ennemies.Enemy;
 import game.items.attack.Weapon;
 
 public class Warrior extends Perso {
@@ -43,4 +44,8 @@ public class Warrior extends Perso {
         return super.toString() + "\nWeapon : " + weapon + "\nShield : " + shield;
     }
 
+    @Override
+    public int getBonusDamage(Enemy enemy) {
+        return this.getWeapon().getLevel(enemy);
+    }
 }

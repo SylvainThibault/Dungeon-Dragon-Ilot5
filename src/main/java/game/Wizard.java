@@ -1,5 +1,6 @@
 package game;
 
+import game.ennemies.Enemy;
 import game.items.attack.Spell;
 
 public class Wizard extends Perso {
@@ -42,5 +43,10 @@ public class Wizard extends Perso {
     // Méthode toString : Affiche les informations d'un objet
     public String toString() {
         return super.toString() + "\nSpell : " + spell.toString() + "\nPhilter : " + philter;
+    }
+
+    @Override
+    public int getBonusDamage(Enemy enemy) {
+        return this.getSpell().getLevel(enemy);
     }
 }

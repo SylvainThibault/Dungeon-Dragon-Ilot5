@@ -1,5 +1,7 @@
 package game;
 
+import game.ennemies.Enemy;
+
 public abstract class Perso {
 
     //Stocke variable
@@ -64,4 +66,6 @@ public abstract class Perso {
     public String toString(){
         return "Name : "+ name + "\nPower : " + power + "\nLife : " + life + "\nImage : " + image + "\nArmor : " + armor;
     }
+
+    public abstract int getBonusDamage(Enemy enemy);
 }
