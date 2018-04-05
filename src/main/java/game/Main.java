@@ -6,6 +6,7 @@ import game.items.attack.Weapon;
 import java.util.*;
 
 import game.items.attack.Spell;
+import game.items.powerup.Bonus;
 
 /**
  * The type Main.

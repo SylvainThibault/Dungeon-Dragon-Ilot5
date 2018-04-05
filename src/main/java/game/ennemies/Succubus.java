@@ -6,8 +6,8 @@ import game.items.attack.Weapon;
 
 public class Succubus extends Enemy {
 
-    public Succubus(String name, int attack) {
-        super(name, attack);
+    public Succubus(String name, int attack, int life) {
+        super(name, attack, life);
     }
 
     @Override
@@ -15,6 +15,7 @@ public class Succubus extends Enemy {
         if (perso instanceof Warrior) {
             Weapon currentWeapon = ((Warrior) perso).getWeapon();
             int currentWeaponLevel = currentWeapon.getLevel() / 2;
+
             System.out.println("Original weapon strength : " + currentWeapon.getLevel());
             System.out.println("Current weapon strength : " + currentWeaponLevel);
             System.out.println("fight Warrior");
