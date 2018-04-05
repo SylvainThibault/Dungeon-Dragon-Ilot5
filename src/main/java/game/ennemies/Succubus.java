@@ -10,6 +10,7 @@ public class Succubus extends Enemy {
         super(name, attack);
     }
 
+    @Override
     public void fight(Perso perso) {
         if (perso instanceof Warrior) {
             Weapon currentWeapon = ((Warrior) perso).getWeapon();

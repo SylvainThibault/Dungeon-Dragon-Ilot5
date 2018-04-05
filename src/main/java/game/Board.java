@@ -53,7 +53,7 @@ public class Board {
     }
 
 
-    public Boolean playTurn() {
+    public Boolean playTurn(Perso player) {
 
         int getCurrentSquare = this.getCurrentSquare();
         System.out.println("current square : " + currentSquare);
@@ -76,16 +76,17 @@ public class Board {
 
         if (newCurrentSquare != null) {
             System.out.println(newCurrentSquare.toString());
+
             if (newCurrentSquare instanceof Bonus) {
-                newCurrentSquareIndex += 5;
+                newCurrentSquareIndex += ((Bonus) newCurrentSquare).getBonus();
                 this.setCurrentSquare(newCurrentSquareIndex);
             }
             if (newCurrentSquare instanceof Malus) {
-                newCurrentSquareIndex -= 5;
+                newCurrentSquareIndex -= ((Malus) newCurrentSquare).getMalus();
                 this.setCurrentSquare(newCurrentSquareIndex);
             }
             if (newCurrentSquare instanceof Enemy){
-                ((Enemy) newCurrentSquare).fight();
+                ((Enemy) newCurrentSquare).fight(player);
             }
         }
         return true;

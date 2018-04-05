@@ -37,7 +37,7 @@ public class Main {
         while (endGame) {
             Scanner sc = new Scanner(System.in);
             String test = sc.nextLine();
-            if (!newGame.playTurn()) {
+            if (!newGame.playTurn(character)) {
                 endGame = exitGame();
             }
         } return endGame;

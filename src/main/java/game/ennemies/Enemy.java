@@ -1,5 +1,7 @@
 package game.ennemies;
 
+import game.Perso;
+
 public class Enemy {
 
     private String name;
@@ -37,7 +39,7 @@ public class Enemy {
                 '}';
     }
 
-    public void fight() {
+    public void fight(Perso perso) {
         System.out.println("FIIIIIIIIIIIIIIIIIIIIIGHT!!!!!!!!!!!");
     }
 }
