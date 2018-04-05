@@ -97,7 +97,9 @@ public class Board {
             if (newCurrentSquare instanceof Enemy) {
                 Boolean fightResult = ((Enemy) newCurrentSquare).fight(player);
                 if(fightResult == null){
-                    return true;
+                    System.out.println("You lost the game");
+                    System.out.println("You will never be a Eric\n");
+                    return false;
                 }
                 if(fightResult){
                     newCurrentSquareIndex += 2;
@@ -128,8 +130,10 @@ public class Board {
         int[] dragLife = {80, 60, 40, 30, 20, 15};
         int[] otherLife = {40, 50, 25, 15};
 
+        int[] dragAge = {10, 15, 40, 30, 20, 15};
+
         for (int i = 0; i < 6; i++) {
-            enemies.add(new Dragon("Drago" + i, dragAttack[i], dragLife[i], 1));
+            enemies.add(new Dragon("Drago" + i, dragAttack[i], dragLife[i], dragAge[i]));
         }
 
         for (int i = 0; i < 4; i++) {

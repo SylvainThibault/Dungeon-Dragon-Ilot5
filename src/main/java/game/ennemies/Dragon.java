@@ -24,14 +24,15 @@ public class Dragon extends Enemy {
     public Boolean fight(Perso perso){
         if( perso instanceof Perso){
             int persoPower = perso.getPower();
-            int attackLevel= perso.ge.getLevel(this);
-            int degat = persoPower+spellLevel;
+            int attackLevel= perso.getBonusDamage(this);
+            int degat = persoPower + attackLevel;
             int lifeEnemy =this.getLife();
-            System.out.println("puissance d'attaque " + degat);
-            System.out.println("Vie du méchant "+ lifeEnemy);
+
+            System.out.println("Perso strength : " + degat + " // " + lifeEnemy + " : Enemy's life");
+
             lifeEnemy = lifeEnemy-degat;
 
-            fightResult(lifeEnemy, perso);
+            return fightResult(lifeEnemy, perso);
         }
         return null;
     }
