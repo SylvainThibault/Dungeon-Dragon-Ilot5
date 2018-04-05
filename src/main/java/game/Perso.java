@@ -40,7 +40,7 @@ public abstract class Perso {
     }
 
     public void setPower(int Power){
-        this.power = Power;
+        this.power = 15;
     }
 
     public void setLife(int Life){
