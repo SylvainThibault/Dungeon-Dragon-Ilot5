@@ -1,12 +1,16 @@
 package game;
 
 import game.ennemies.EnemiesGenerator;
+import game.ennemies.Enemy;
 import game.items.ItemGenerator;
 import game.items.attack.Weapon;
 
 import java.util.*;
 
 import game.items.attack.Spell;
+import game.items.powerup.Bonus;
+import game.items.powerup.Joker;
+import game.items.powerup.Malus;
 
 /**
  * The type Main.
@@ -25,56 +29,9 @@ public class Main {
         character = createCharacter();
         boolean play = true;
         do {
-            play = newGame();
+            play = PlayMethods.newGame(character);
         } while (play);
     }
-
-    private static Boolean newGame() {
-        Board newGame = new Board();
-
-        newGame.randomizeSquareContent(EnemiesGenerator.getEnemies());
-        newGame.randomizeSquareContent(ItemGenerator.getItems());
-
-        System.out.println("Let's go! (type 'return' to move forward)");
-
-        Boolean endThisGame = false;
-        Boolean endGame = false;
-
-        while (!endThisGame) {
-            // Type return to move forward
-            Scanner sc = new Scanner(System.in);
-            String typeReturn = sc.nextLine();
-
-            Boolean lastSquare = !newGame.playTurn(character);
-            if (lastSquare) {
-                //call the exit menu
-                endGame = playNewGameMenu();
-                endThisGame = true;
-            }
-        }
-        return endGame;
-    }
-
-
-    private static Boolean playNewGameMenu() {
-        char yesNoAnswer = 'o';
-        while (yesNoAnswer != '1' && yesNoAnswer != '2') {
-            System.out.println("Do you want to \n1. Start a new game or \n2. Exit ?");
-            try {
-                Scanner sc = new Scanner(System.in);
-                yesNoAnswer = sc.nextLine().charAt(0);
-            } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("No answer, please try again :");
-            }
-            System.out.println("You typed : " + yesNoAnswer);
-        }
-
-        if (yesNoAnswer == '2') {
-            return false;
-        }
-        return true;
-    }
-
 
     private static Perso createCharacter() {
         String choiceCharacter;

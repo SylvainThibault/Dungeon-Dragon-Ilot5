@@ -8,3 +8,4 @@ public class Methods {
         return ThreadLocalRandom.current().nextInt(between, and + 1);
     }
 }
+

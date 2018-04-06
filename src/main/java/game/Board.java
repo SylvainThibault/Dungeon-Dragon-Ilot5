@@ -1,17 +1,15 @@
 package game;
 
-
-import game.ennemies.Dragon;
+import game.ennemies.EnemiesGenerator;
 import game.ennemies.Enemy;
-import game.ennemies.Sorcerer;
-import game.ennemies.Succubus;
+import game.items.ItemGenerator;
 import game.items.attack.Spell;
 import game.items.attack.Weapon;
 import game.items.powerup.Bonus;
 import game.items.powerup.Joker;
 import game.items.powerup.Malus;
 import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Arrays;
 
 /**
  * The type Board.
@@ -25,8 +23,8 @@ public class Board {
     /**
      * The Squares.
      */
-    public Object Squares[] = new Object[63];
-    private int boardSize = Squares.length;
+    public static Object Squares[] = new Object[63];
+    public static int boardSize = Squares.length;
 
     /**
      * Gets current square.
@@ -47,94 +45,24 @@ public class Board {
         System.out.println("Your Character is now at Square n°" + currentSquare);
     }
 
-    public Object[] getSquares() {
-        return Squares;
+    public Board generateNewBoard() {
+        Arrays.fill(Squares, null);
+        this.randomizeSquareContent(EnemiesGenerator.getEnemies());
+        this.randomizeSquareContent(ItemGenerator.getItems());
+
+        return this;
     }
 
-
-    public Boolean playTurn(Perso player) {
-
-        int getCurrentSquare = this.getCurrentSquare();
-        System.out.println("current square : " + currentSquare);
-
-        int diceResult = Methods.generateRandomNum(1,6);
-        System.out.println("dice result : " + diceResult);
-
-        int newCurrentSquareIndex = getCurrentSquare + diceResult;
-        Object newCurrentSquare;
-
-        try {
-            newCurrentSquare = this.Squares[newCurrentSquareIndex];
-        } catch (Exception e) {
-            this.setCurrentSquare(boardSize);
-            System.out.println("You reached the last square");
-            return false;
-        }
-
-        this.setCurrentSquare(newCurrentSquareIndex);
-
-        if (newCurrentSquare != null) {
-            System.out.println(newCurrentSquare.toString());
-
-            if (newCurrentSquare instanceof Bonus) {
-                if (newCurrentSquareIndex <= (boardSize - ((Bonus) newCurrentSquare).getBonus())) {
-                    newCurrentSquareIndex += ((Bonus) newCurrentSquare).getBonus();
-                    this.setCurrentSquare(newCurrentSquareIndex);
-                } else {
-                    this.setCurrentSquare(boardSize);
-                    System.out.println("You reached the last square");
-                    return false;
-                }
-            }
-
-            if (newCurrentSquare instanceof Malus) {
-                newCurrentSquareIndex -= ((Malus) newCurrentSquare).getMalus();
-                this.setCurrentSquare(newCurrentSquareIndex);
-            }
-
-            if (newCurrentSquare instanceof Joker){
-                int bonusLife = ((Joker) newCurrentSquare).getBonusLife();
-                int newPlayerLife = player.getLife() + bonusLife;
-                player.setLife(newPlayerLife);
-                System.out.println("Congratulations ! You've earned " + bonusLife + " bonus life. Your new life is set to : " + player.getLife());
-                return true;
-            }
-
-            if (newCurrentSquare instanceof Spell && player instanceof Wizard){
-                ((Wizard) player).setSpell((Spell) newCurrentSquare);
-                System.out.println("Congratulation ! Your new Spell is " + ((Spell) newCurrentSquare).getName());
-                return true;
-            }
-
-            if (newCurrentSquare instanceof Weapon && player instanceof Warrior){
-                ((Warrior) player).setWeapon((Weapon) newCurrentSquare);
-                System.out.println("Congratulation ! Your new Weapon is " + ((Weapon) newCurrentSquare).getName());
-                return true;
-            }
-
-            if (newCurrentSquare instanceof Enemy) {
-                Boolean fightResult = ((Enemy) newCurrentSquare).fight(player);
-                if(fightResult == null){
-                    return true;
-                }
-                if(fightResult){
-                    newCurrentSquareIndex += 2;
-                    this.setCurrentSquare(newCurrentSquareIndex);
-                    return true;
-                }
-                newCurrentSquareIndex -= 2;
-                this.setCurrentSquare(newCurrentSquareIndex);
-            }
-        }
-        return true;
+    public Object[] getSquares() {
+        return Squares;
     }
 
     public void randomizeSquareContent(ArrayList contentArray) {
         int numberOfItems = contentArray.size();
         while (numberOfItems > 0) {
             Integer randomNum = Methods.generateRandomNum(0,boardSize-1);
-            if (this.Squares[randomNum] == null) {
-                this.Squares[randomNum] = contentArray.get(numberOfItems - 1);
+            if (Squares[randomNum] == null) {
+                Squares[randomNum] = contentArray.get(numberOfItems - 1);
                 numberOfItems--;
             }
         }
