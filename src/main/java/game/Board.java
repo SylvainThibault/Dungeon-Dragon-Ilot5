@@ -1,13 +1,7 @@
 package game;
 
 import game.ennemies.EnemiesGenerator;
-import game.ennemies.Enemy;
 import game.items.ItemGenerator;
-import game.items.attack.Spell;
-import game.items.attack.Weapon;
-import game.items.powerup.Bonus;
-import game.items.powerup.Joker;
-import game.items.powerup.Malus;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -45,12 +39,10 @@ public class Board {
         System.out.println("Your Character is now at Square n°" + currentSquare);
     }
 
-    public Board generateNewBoard() {
+    public void generateNewBoard() {
         Arrays.fill(Squares, null);
         this.randomizeSquareContent(EnemiesGenerator.getEnemies());
         this.randomizeSquareContent(ItemGenerator.getItems());
-
-        return this;
     }
 
     public Object[] getSquares() {

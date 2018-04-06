@@ -10,7 +10,7 @@ public class Sorcerer extends Enemy {
     }
 
     @Override
-    public Boolean fight(Perso perso){
+    public String fight(Perso perso){
         if( perso instanceof Wizard){
             int persoPower = perso.getPower();
             int spellLevel=perso.getBonusDamage(this);
@@ -22,6 +22,6 @@ public class Sorcerer extends Enemy {
 
             return fightResult(lifeEnemy, perso);
         }
-        return null;
+        return "no fight";
     }
 }

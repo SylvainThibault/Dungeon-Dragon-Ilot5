@@ -1,16 +1,10 @@
 package game;
 
-import game.ennemies.EnemiesGenerator;
-import game.ennemies.Enemy;
-import game.items.ItemGenerator;
 import game.items.attack.Weapon;
 
 import java.util.*;
 
 import game.items.attack.Spell;
-import game.items.powerup.Bonus;
-import game.items.powerup.Joker;
-import game.items.powerup.Malus;
 
 /**
  * The type Main.

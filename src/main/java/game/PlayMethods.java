@@ -25,7 +25,7 @@ public class PlayMethods {
             Scanner sc = new Scanner(System.in);
             String typeReturn = sc.nextLine();
 
-            Boolean lastSquare = !playTurn(character , newBoard);
+            Boolean lastSquare = !playTurn(character, newBoard);
             if (lastSquare) {
                 //call the exit menu
                 endGame = playNewGameMenu();
@@ -59,7 +59,7 @@ public class PlayMethods {
         int getCurrentSquare = newBoard.getCurrentSquare();
         System.out.println("current square : " + newBoard.currentSquare);
 
-        int diceResult = Methods.generateRandomNum(1,6);
+        int diceResult = Methods.generateRandomNum(1, 6);
         System.out.println("dice result : " + diceResult);
 
         int newCurrentSquareIndex = getCurrentSquare + diceResult;
@@ -94,7 +94,7 @@ public class PlayMethods {
                 newBoard.setCurrentSquare(newCurrentSquareIndex);
             }
 
-            if (newCurrentSquare instanceof Joker){
+            if (newCurrentSquare instanceof Joker) {
                 int bonusLife = ((Joker) newCurrentSquare).getBonusLife();
                 int newPlayerLife = player.getLife() + bonusLife;
                 player.setLife(newPlayerLife);
@@ -102,30 +102,36 @@ public class PlayMethods {
                 return true;
             }
 
-            if (newCurrentSquare instanceof Spell && player instanceof Wizard){
+            if (newCurrentSquare instanceof Spell && player instanceof Wizard) {
                 ((Wizard) player).setSpell((Spell) newCurrentSquare);
                 System.out.println("Congratulation ! Your new Spell is " + ((Spell) newCurrentSquare).getName());
                 return true;
             }
 
-            if (newCurrentSquare instanceof Weapon && player instanceof Warrior){
+            if (newCurrentSquare instanceof Weapon && player instanceof Warrior) {
                 ((Warrior) player).setWeapon((Weapon) newCurrentSquare);
                 System.out.println("Congratulation ! Your new Weapon is " + ((Weapon) newCurrentSquare).getName());
                 return true;
             }
 
             if (newCurrentSquare instanceof Enemy) {
-                Boolean fightResult = ((Enemy) newCurrentSquare).fight(player);
-                if(fightResult == null){
-                    return true;
+                String fightResult = ((Enemy) newCurrentSquare).fight(player);
+                switch (fightResult) {
+                    case "win":
+                        newCurrentSquareIndex += 2;
+                        newBoard.setCurrentSquare(newCurrentSquareIndex);
+                        break;
+                    case "lose" :
+                        newCurrentSquareIndex -= 2;
+                        newBoard.setCurrentSquare(newCurrentSquareIndex);
+                        break;
+                    case "dead":
+                        System.out.println("You're dead \n");
+                        return false;
+                    default :
+                        break;
                 }
-                if(fightResult){
-                    newCurrentSquareIndex += 2;
-                    newBoard.setCurrentSquare(newCurrentSquareIndex);
-                    return true;
-                }
-                newCurrentSquareIndex -= 2;
-                newBoard.setCurrentSquare(newCurrentSquareIndex);
+                return true;
             }
         }
         return true;
