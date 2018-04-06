@@ -2,8 +2,6 @@ package game.ennemies;
 
 import game.Perso;
 import game.Warrior;
-import game.Wizard;
-import game.items.attack.Weapon;
 
 public class Succubus extends Enemy {
 
@@ -12,7 +10,7 @@ public class Succubus extends Enemy {
     }
 
     @Override
-    public Boolean fight(Perso perso) {
+    public String fight(Perso perso) {
         if (perso instanceof Warrior) {
 
             int weaponLevel = perso.getBonusDamage(this) / 2;
@@ -26,6 +24,6 @@ public class Succubus extends Enemy {
 
             return fightResult(lifeEnemy, perso);
         }
-        return null;
+        return "no fight";
     }
 }

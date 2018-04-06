@@ -2,6 +2,7 @@ package game.ennemies;
 
 import game.Perso;
 
+
 public abstract class Enemy {
 
     private String name;
@@ -9,7 +10,8 @@ public abstract class Enemy {
     private int life;
 
 
-    public int getLife() {
+
+    protected int getLife() {
         return life;
     }
 
@@ -50,12 +52,12 @@ public abstract class Enemy {
                 '}';
     }
 
-    public abstract Boolean fight(Perso perso);
+    public abstract String fight(Perso perso);
 
-    public Boolean fightResult(int lifeEnemy, Perso perso){
+    protected String fightResult(int lifeEnemy, Perso perso){
         if (lifeEnemy <= 0) {
             System.out.println("you win against " + this.getName());
-            return true;
+            return "win";
         } else {
             int persoLife = perso.getLife();
             int attackEnemy = this.getAttack();
@@ -63,12 +65,16 @@ public abstract class Enemy {
                 attackEnemy += ((Dragon) this).getAge();
             }
             System.out.println("Enemy strength : " + attackEnemy);
+
             int newPersoLife = persoLife - attackEnemy;
+            if(newPersoLife <= 0){
+                return "dead";
+            }
 
             System.out.println("you lose");
             perso.setLife(newPersoLife);
             System.out.println("new life personnage " + perso.getLife());
-            return false;
+            return "lose";
         }
     }
 }

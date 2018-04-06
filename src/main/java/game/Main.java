@@ -1,12 +1,10 @@
 package game;
 
-import game.items.ItemGenerator;
 import game.items.attack.Weapon;
 
 import java.util.*;
 
 import game.items.attack.Spell;
-import game.items.powerup.Bonus;
 
 /**
  * The type Main.
@@ -21,34 +19,12 @@ public class Main {
      * @param args the input arguments
      */
 
-
     public static void main(String[] args) {
         character = createCharacter();
         boolean play = true;
         do {
-            play = newGame();
+            play = PlayMethods.newGame(character);
         } while (play);
-    }
-
-    private static Boolean newGame() {
-        Board newGame = new Board();
-
-        newGame.randomizeSquareContent(newGame.createEnnemies());
-        newGame.randomizeSquareContent(ItemGenerator.getItems());
-
-        Boolean endGame = false;
-
-        System.out.println("Let's go! (type 'return' to move forward)");
-
-        while (!endGame) {
-            Scanner sc = new Scanner(System.in);
-            String typeReturn = sc.nextLine();
-
-            if (!newGame.playTurn(character)) {
-                endGame = exitGame();
-            }
-        }
-        return endGame;
     }
 
     private static Perso createCharacter() {
@@ -109,25 +85,6 @@ public class Main {
         System.out.println("Start Playing!");
 
         return wizard1;
-    }
-
-    private static Boolean exitGame() {
-        char yesNoAnswer = 'o';
-        while (yesNoAnswer != '1' && yesNoAnswer != '2') {
-            System.out.println("Do you want to \n1. exit or \n2. start a new Game ?");
-            try {
-                Scanner sc = new Scanner(System.in);
-                yesNoAnswer = sc.nextLine().charAt(0);
-            } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("No answer, please try again :");
-            }
-            System.out.println("You typed : " + yesNoAnswer);
-        }
-
-        if (yesNoAnswer == '2') {
-            return true;
-        }
-        return false;
     }
 
     private static Spell choseSpell() {

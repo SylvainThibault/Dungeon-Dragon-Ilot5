@@ -1,7 +1,6 @@
 package game.ennemies;
 
 import game.Perso;
-import game.Wizard;
 
 public class Dragon extends Enemy {
 
@@ -21,7 +20,7 @@ public class Dragon extends Enemy {
     }
 
     @Override
-    public Boolean fight(Perso perso){
+    public String fight(Perso perso){
         if( perso instanceof Perso){
             int persoPower = perso.getPower();
             int attackLevel= perso.getBonusDamage(this);
@@ -34,6 +33,6 @@ public class Dragon extends Enemy {
 
             return fightResult(lifeEnemy, perso);
         }
-        return null;
+        return "no fight";
     }
 }
