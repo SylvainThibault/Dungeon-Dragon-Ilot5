@@ -46,4 +46,8 @@ public abstract class Attack extends Item{
     public int getDefense(Enemy enemy){
         return this.defenseLevel.getDefenseBonus(enemy);
     }
+
+    public AttackLevel getAttackLevel() {
+        return this.attackLevel;
+    }
 }
