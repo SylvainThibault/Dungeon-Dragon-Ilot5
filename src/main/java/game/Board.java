@@ -5,16 +5,12 @@ import game.ennemies.Dragon;
 import game.ennemies.Enemy;
 import game.ennemies.Sorcerer;
 import game.ennemies.Succubus;
-import game.items.attack.Attack;
 import game.items.attack.Spell;
 import game.items.attack.Weapon;
 import game.items.powerup.Bonus;
 import game.items.powerup.Joker;
 import game.items.powerup.Malus;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -30,7 +26,7 @@ public class Board {
      * The Squares.
      */
     public Object Squares[] = new Object[63];
-    private static ArrayList<Enemy> enemies = new ArrayList<>();
+    private ArrayList<Enemy> enemies = new ArrayList<>();
 
     private int boardSize = Squares.length;
 
@@ -121,8 +117,6 @@ public class Board {
             if (newCurrentSquare instanceof Enemy) {
                 Boolean fightResult = ((Enemy) newCurrentSquare).fight(player);
                 if(fightResult == null){
-                    System.out.println("You lost the game");
-                    System.out.println("You will never be a Eric\n");
                     return true;
                 }
                 if(fightResult){

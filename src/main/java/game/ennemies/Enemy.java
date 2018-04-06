@@ -64,9 +64,7 @@ public abstract class Enemy {
             }
             System.out.println("Enemy strength : " + attackEnemy);
             int newPersoLife = persoLife - attackEnemy;
-            if (newPersoLife < 0){
-                return null;
-            }
+
             System.out.println("you lose");
             perso.setLife(newPersoLife);
             System.out.println("new life personnage " + perso.getLife());

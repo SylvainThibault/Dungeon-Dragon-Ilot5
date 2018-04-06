@@ -24,7 +24,10 @@ public class Main {
 
     public static void main(String[] args) {
         character = createCharacter();
-        newGame();
+        boolean play = true;
+        do {
+            play = newGame();
+        } while (play);
     }
 
     private static Boolean newGame() {
@@ -33,15 +36,19 @@ public class Main {
         newGame.randomizeSquareContent(newGame.createEnnemies());
         newGame.randomizeSquareContent(ItemGenerator.getItems());
 
-        Boolean endGame = true;
-        System.out.println("Let's go! (type 'return' to move forward");
-        while (endGame) {
+        Boolean endGame = false;
+
+        System.out.println("Let's go! (type 'return' to move forward)");
+
+        while (!endGame) {
             Scanner sc = new Scanner(System.in);
-            String test = sc.nextLine();
+            String typeReturn = sc.nextLine();
+
             if (!newGame.playTurn(character)) {
                 endGame = exitGame();
             }
-        } return endGame;
+        }
+        return endGame;
     }
 
     private static Perso createCharacter() {
@@ -106,7 +113,7 @@ public class Main {
 
     private static Boolean exitGame() {
         char yesNoAnswer = 'o';
-        while (yesNoAnswer != '1') {
+        while (yesNoAnswer != '1' && yesNoAnswer != '2') {
             System.out.println("Do you want to \n1. exit or \n2. start a new Game ?");
             try {
                 Scanner sc = new Scanner(System.in);
@@ -114,47 +121,49 @@ public class Main {
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("No answer, please try again :");
             }
-            if (yesNoAnswer == '2') {
-                return newGame();
-            }
             System.out.println("You typed : " + yesNoAnswer);
+        }
+
+        if (yesNoAnswer == '2') {
+            return true;
         }
         return false;
     }
 
-    private static Spell choseSpell(){
-        Map<Integer,Spell> spellMap= Spell.getSpell();
+    private static Spell choseSpell() {
+        Map<Integer, Spell> spellMap = Spell.getSpell();
         System.out.println("Choose a spell");
-        for( Map.Entry<Integer, Spell> entry : spellMap.entrySet()) {
+        for (Map.Entry<Integer, Spell> entry : spellMap.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue().getName());
         }
         try {
             int spellId = sc.nextInt();
 //            sc.nextLine();
-            if (spellId < 1 || spellId >3){
+            if (spellId < 1 || spellId > 3) {
                 throw new InputMismatchException();
             }
             return spellMap.get(spellId);
-        } catch (InputMismatchException e){
+        } catch (InputMismatchException e) {
             System.out.println("Wrong Entry");
             sc.nextLine();
             return choseSpell();
         }
     }
 
-    private static Weapon choseWeapon(){
-        Map<Integer,Weapon> weaponMap= Weapon.getWeapons();
+    private static Weapon choseWeapon() {
+        Map<Integer, Weapon> weaponMap = Weapon.getWeapons();
         System.out.println("Choose a weapon");
-        for( Map.Entry<Integer, Weapon> entry : weaponMap.entrySet()) {
+
+        for (Map.Entry<Integer, Weapon> entry : weaponMap.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue().getName());
         }
         try {
             int armeId = sc.nextInt();
-            if (armeId < 1 || armeId >3){
+            if (armeId < 1 || armeId > 3) {
                 throw new InputMismatchException();
             }
             return weaponMap.get(armeId);
-        } catch (InputMismatchException e){
+        } catch (InputMismatchException e) {
             System.out.println("Wrong Entry");
             sc.nextLine();
             return choseWeapon();
