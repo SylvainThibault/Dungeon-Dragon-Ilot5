@@ -1,5 +1,7 @@
 package game;
 
+import game.ennemies.EnemiesGenerator;
+import game.ennemies.Enemy;
 import game.items.ItemGenerator;
 import game.items.attack.Weapon;
 
@@ -21,7 +23,6 @@ public class Main {
      * @param args the input arguments
      */
 
-
     public static void main(String[] args) {
         character = createCharacter();
         boolean play = true;
@@ -33,7 +34,7 @@ public class Main {
     private static Boolean newGame() {
         Board newGame = new Board();
 
-        newGame.randomizeSquareContent(newGame.createEnnemies());
+        newGame.randomizeSquareContent(EnemiesGenerator.getEnemies());
         newGame.randomizeSquareContent(ItemGenerator.getItems());
 
         Boolean endGame = false;
@@ -50,6 +51,27 @@ public class Main {
         }
         return endGame;
     }
+
+
+    private static Boolean exitGame() {
+        char yesNoAnswer = 'o';
+        while (yesNoAnswer != '1' && yesNoAnswer != '2') {
+            System.out.println("Do you want to \n1. exit or \n2. start a new Game ?");
+            try {
+                Scanner sc = new Scanner(System.in);
+                yesNoAnswer = sc.nextLine().charAt(0);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("No answer, please try again :");
+            }
+            System.out.println("You typed : " + yesNoAnswer);
+        }
+
+        if (yesNoAnswer == '2') {
+            return true;
+        }
+        return false;
+    }
+
 
     private static Perso createCharacter() {
         String choiceCharacter;
@@ -109,25 +131,6 @@ public class Main {
         System.out.println("Start Playing!");
 
         return wizard1;
-    }
-
-    private static Boolean exitGame() {
-        char yesNoAnswer = 'o';
-        while (yesNoAnswer != '1' && yesNoAnswer != '2') {
-            System.out.println("Do you want to \n1. exit or \n2. start a new Game ?");
-            try {
-                Scanner sc = new Scanner(System.in);
-                yesNoAnswer = sc.nextLine().charAt(0);
-            } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("No answer, please try again :");
-            }
-            System.out.println("You typed : " + yesNoAnswer);
-        }
-
-        if (yesNoAnswer == '2') {
-            return true;
-        }
-        return false;
     }
 
     private static Spell choseSpell() {

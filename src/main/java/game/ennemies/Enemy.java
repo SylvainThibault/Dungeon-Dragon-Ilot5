@@ -2,11 +2,13 @@ package game.ennemies;
 
 import game.Perso;
 
+
 public abstract class Enemy {
 
     private String name;
     private int attack;
     private int life;
+
 
 
     public int getLife() {

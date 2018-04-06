@@ -27,7 +27,6 @@ public class Board {
      */
     public Object Squares[] = new Object[63];
     private int boardSize = Squares.length;
-    private ArrayList<Enemy> enemies = new ArrayList<>();
 
     /**
      * Gets current square.
@@ -128,29 +127,6 @@ public class Board {
             }
         }
         return true;
-    }
-
-    public ArrayList createEnnemies() {
-        int[] dragAttack = {80, 60, 40, 30, 20, 15};
-        int[] otherAttack = {40, 50, 25, 15};
-
-        int[] dragLife = {80, 60, 40, 30, 20, 15};
-        int[] otherLife = {40, 50, 25, 15};
-
-        int[] dragAge = {10, 15, 40, 30, 20, 15};
-
-        for (int i = 0; i < 6; i++) {
-            enemies.add(new Dragon("Drago" + i, dragAttack[i], dragLife[i], dragAge[i]));
-        }
-
-        for (int i = 0; i < 4; i++) {
-            enemies.add(new Sorcerer("Sorcerer" + i, otherAttack[i], otherLife[i]));
-        }
-
-        for (int i = 0; i < 4; i++) {
-            enemies.add(new Succubus("Succ" + i, otherAttack[i], otherLife[i]));
-        }
-        return enemies;
     }
 
     public void randomizeSquareContent(ArrayList contentArray) {
