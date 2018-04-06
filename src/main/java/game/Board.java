@@ -26,9 +26,8 @@ public class Board {
      * The Squares.
      */
     public Object Squares[] = new Object[63];
-    private ArrayList<Enemy> enemies = new ArrayList<>();
-
     private int boardSize = Squares.length;
+    private ArrayList<Enemy> enemies = new ArrayList<>();
 
     /**
      * Gets current square.
@@ -59,7 +58,7 @@ public class Board {
         int getCurrentSquare = this.getCurrentSquare();
         System.out.println("current square : " + currentSquare);
 
-        int diceResult = diceResult();
+        int diceResult = Methods.generateRandomNum(1,6);
         System.out.println("dice result : " + diceResult);
 
         int newCurrentSquareIndex = getCurrentSquare + diceResult;
@@ -131,16 +130,6 @@ public class Board {
         return true;
     }
 
-    /**
-     * Roll dice integer.
-     *
-     * @return the integer
-     */
-    public Integer diceResult() {
-        Integer randomNum = ThreadLocalRandom.current().nextInt(1, 7);
-        return randomNum;
-    }
-
     public ArrayList createEnnemies() {
         int[] dragAttack = {80, 60, 40, 30, 20, 15};
         int[] otherAttack = {40, 50, 25, 15};
@@ -167,7 +156,7 @@ public class Board {
     public void randomizeSquareContent(ArrayList contentArray) {
         int numberOfItems = contentArray.size();
         while (numberOfItems > 0) {
-            Integer randomNum = ThreadLocalRandom.current().nextInt(0, boardSize);
+            Integer randomNum = Methods.generateRandomNum(0,boardSize-1);
             if (this.Squares[randomNum] == null) {
                 this.Squares[randomNum] = contentArray.get(numberOfItems - 1);
                 numberOfItems--;
