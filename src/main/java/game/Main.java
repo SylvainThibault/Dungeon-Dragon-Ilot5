@@ -1,14 +1,12 @@
 package game;
 
 import game.ennemies.EnemiesGenerator;
-import game.ennemies.Enemy;
 import game.items.ItemGenerator;
 import game.items.attack.Weapon;
 
 import java.util.*;
 
 import game.items.attack.Spell;
-import game.items.powerup.Bonus;
 
 /**
  * The type Main.
@@ -37,26 +35,31 @@ public class Main {
         newGame.randomizeSquareContent(EnemiesGenerator.getEnemies());
         newGame.randomizeSquareContent(ItemGenerator.getItems());
 
-        Boolean endGame = false;
-
         System.out.println("Let's go! (type 'return' to move forward)");
 
-        while (!endGame) {
+        Boolean endThisGame = false;
+        Boolean endGame = false;
+
+        while (!endThisGame) {
+            // Type return to move forward
             Scanner sc = new Scanner(System.in);
             String typeReturn = sc.nextLine();
 
-            if (!newGame.playTurn(character)) {
-                endGame = exitGame();
+            Boolean lastSquare = !newGame.playTurn(character);
+            if (lastSquare) {
+                //call the exit menu
+                endGame = playNewGameMenu();
+                endThisGame = true;
             }
         }
         return endGame;
     }
 
 
-    private static Boolean exitGame() {
+    private static Boolean playNewGameMenu() {
         char yesNoAnswer = 'o';
         while (yesNoAnswer != '1' && yesNoAnswer != '2') {
-            System.out.println("Do you want to \n1. exit or \n2. start a new Game ?");
+            System.out.println("Do you want to \n1. Start a new game or \n2. Exit ?");
             try {
                 Scanner sc = new Scanner(System.in);
                 yesNoAnswer = sc.nextLine().charAt(0);
@@ -67,9 +70,9 @@ public class Main {
         }
 
         if (yesNoAnswer == '2') {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
 
