@@ -9,6 +9,8 @@ import game.items.powerup.Malus;
 
 import java.util.Scanner;
 
+import static game.Methods.choiceString;
+
 public class PlayMethods {
 
     public static Boolean newGame(Perso character) {
@@ -103,14 +105,33 @@ public class PlayMethods {
             }
 
             if (newCurrentSquare instanceof Spell && player instanceof Wizard) {
-                ((Wizard) player).setSpell((Spell) newCurrentSquare);
-                System.out.println("Congratulation ! Your new Spell is " + ((Spell) newCurrentSquare).getName());
+                Spell spell = ((Wizard) player).getSpell();
+                String spellName = spell.getName();
+                String spellLevel = spell.getAttackLevel().toString();
+                System.out.println("\nYour spell : " + spellName + "\nAttack level " + spellLevel + "\nWould you like to choose this spell ? yes/no");
+                Boolean userChoice = choiceString("yes", "no");
+                if (userChoice == true) {
+                    ((Wizard) player).setSpell((Spell) newCurrentSquare);
+                    System.out.println("Congratulation ! Your new Spell is " + ((Spell) newCurrentSquare).getName());
+                } else {
+                    System.out.println("You haven't change your spell");
+                }
                 return true;
             }
 
             if (newCurrentSquare instanceof Weapon && player instanceof Warrior) {
-                ((Warrior) player).setWeapon((Weapon) newCurrentSquare);
-                System.out.println("Congratulation ! Your new Weapon is " + ((Weapon) newCurrentSquare).getName());
+                Weapon weapon = ((Warrior) player).getWeapon();
+                String weaponName = weapon.getName();
+                String weaponLevel = weapon.getAttackLevel().toString();
+                System.out.println("\nYour weapon : " + weaponName + "\nAttack level " + weaponLevel + "\nWould you like to choose this weapon ? yes/no");
+                Boolean userChoice = choiceString("yes", "no");
+                if (userChoice == true) {
+                    ((Warrior) player).setWeapon((Weapon) newCurrentSquare);
+                    System.out.println("Congratulation ! Your new Weapon is " + ((Weapon) newCurrentSquare).getName());
+
+                } else {
+                    System.out.println("You haven't change your weapon");
+                }
                 return true;
             }
 
@@ -121,14 +142,14 @@ public class PlayMethods {
                         newCurrentSquareIndex += 2;
                         newBoard.setCurrentSquare(newCurrentSquareIndex);
                         break;
-                    case "lose" :
+                    case "lose":
                         newCurrentSquareIndex -= 2;
                         newBoard.setCurrentSquare(newCurrentSquareIndex);
                         break;
                     case "dead":
                         System.out.println("You're dead \n");
                         return false;
-                    default :
+                    default:
                         break;
                 }
                 return true;
