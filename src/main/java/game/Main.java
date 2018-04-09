@@ -23,6 +23,7 @@ public class Main {
         character = createCharacter();
         boolean play = true;
         do {
+            character.setLife(100);
             play = PlayMethods.newGame(character);
         } while (play);
     }
