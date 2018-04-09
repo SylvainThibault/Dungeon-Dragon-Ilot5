@@ -13,8 +13,8 @@ public abstract class Perso {
 
     public Perso(String name) {
         this.name = name;
-        setPower(0);
-        setLife(10);
+        setPower(15);
+        setLife(100);
     }
 
     //Accesseurs//

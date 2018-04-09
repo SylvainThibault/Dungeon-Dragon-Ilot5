@@ -71,7 +71,7 @@ public class PlayMethods {
             newCurrentSquare = Board.Squares[newCurrentSquareIndex];
         } catch (Exception e) {
             newBoard.setCurrentSquare(Board.boardSize);
-            System.out.println("You reached the last square");
+            System.out.println("\n You won the game!\n");
             return false;
         }
 
@@ -86,7 +86,7 @@ public class PlayMethods {
                     newBoard.setCurrentSquare(newCurrentSquareIndex);
                 } else {
                     newBoard.setCurrentSquare(Board.boardSize);
-                    System.out.println("You reached the last square");
+                    System.out.println("\n You won the game!\n");
                     return false;
                 }
             }
