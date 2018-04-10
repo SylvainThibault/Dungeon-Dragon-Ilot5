@@ -68,4 +68,6 @@ public abstract class Perso {
     }
 
     public abstract int getBonusDamage(Enemy enemy);
+
+    public abstract String getPersoType();
 }

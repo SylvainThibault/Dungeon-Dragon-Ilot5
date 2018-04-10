@@ -5,13 +5,15 @@ import game.items.attack.Weapon;
 import java.util.*;
 
 import game.items.attack.Spell;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  * The type Main.
  */
 public class Main {
     private static Scanner sc = new Scanner(System.in);
-    private static Perso character;
 
     /**
      * The entry point of application.
@@ -20,7 +22,8 @@ public class Main {
      */
 
     public static void main(String[] args) {
-        character = createCharacter();
+
+        Perso character = createCharacter();
         boolean play = true;
         do {
             character.setLife(100);

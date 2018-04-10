@@ -49,4 +49,9 @@ public class Wizard extends Perso {
     public int getBonusDamage(Enemy enemy) {
         return this.getSpell().getLevel(enemy);
     }
+
+    @Override
+    public String getPersoType() {
+        return "Wizard";
+    }
 }

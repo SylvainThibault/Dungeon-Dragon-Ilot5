@@ -35,4 +35,5 @@ public class Dragon extends Enemy {
         }
         return "no fight";
     }
+
 }
