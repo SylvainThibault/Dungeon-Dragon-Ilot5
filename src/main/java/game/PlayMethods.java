@@ -1,14 +1,13 @@
 package game;
 
 import game.ennemies.Enemy;
+import game.items.attack.Attack;
 import game.items.attack.Spell;
 import game.items.attack.Weapon;
 import game.items.powerup.Bonus;
 import game.items.powerup.Joker;
 import game.items.powerup.Malus;
-
 import java.util.Scanner;
-
 import static game.Methods.choiceString;
 
 public class PlayMethods {
@@ -25,7 +24,7 @@ public class PlayMethods {
         while (!endThisGame) {
             // Type return to move forward
             Scanner sc = new Scanner(System.in);
-            String typeReturn = sc.nextLine();
+            sc.nextLine();
 
             Boolean lastSquare = !playTurn(character, newBoard);
             if (lastSquare) {
@@ -68,9 +67,9 @@ public class PlayMethods {
         Object newCurrentSquare;
 
         try {
-            newCurrentSquare = Board.Squares[newCurrentSquareIndex];
+            newCurrentSquare = newBoard.Squares[newCurrentSquareIndex];
         } catch (Exception e) {
-            newBoard.setCurrentSquare(Board.boardSize);
+            newBoard.setCurrentSquare(newBoard.boardSize);
             System.out.println("\n You won the game!\n");
             return false;
         }
@@ -81,11 +80,11 @@ public class PlayMethods {
             System.out.println(newCurrentSquare.toString());
 
             if (newCurrentSquare instanceof Bonus) {
-                if (newCurrentSquareIndex <= (Board.boardSize - ((Bonus) newCurrentSquare).getBonus())) {
+                if (newCurrentSquareIndex <= (newBoard.boardSize - ((Bonus) newCurrentSquare).getBonus())) {
                     newCurrentSquareIndex += ((Bonus) newCurrentSquare).getBonus();
                     newBoard.setCurrentSquare(newCurrentSquareIndex);
                 } else {
-                    newBoard.setCurrentSquare(Board.boardSize);
+                    newBoard.setCurrentSquare(newBoard.boardSize);
                     System.out.println("\n You won the game!\n");
                     return false;
                 }
@@ -156,5 +155,50 @@ public class PlayMethods {
             }
         }
         return true;
+    }
+
+    public static Perso createCharacter() {
+        Scanner sc = new Scanner(System.in);
+        String choiceCharacter;
+        System.out.println("Choose your character : \n1.Warrior or \n2.Wizard");
+        choiceCharacter = sc.nextLine();
+
+        if (choiceCharacter.equals("1")) {
+            System.out.println("You chose to create a warrior");
+            Warrior warrior = new Warrior();
+            return nameWarrior(warrior);
+        }
+        if (choiceCharacter.equals("2")) {
+            System.out.println("You chose to create a wizard");
+            Wizard wizard = new Wizard();
+            return nameWizard(wizard);
+        }
+        System.out.println("Wrong Entry");
+        return createCharacter();
+    }
+
+    private static Warrior nameWarrior(Warrior warrior) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Choose the name  : ");
+        String newName = sc.nextLine();
+        warrior.setName(newName);
+        return warrior;
+    }
+
+    private static Wizard nameWizard(Wizard wizard) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Choose the name  : ");
+        String newName = sc.nextLine();
+        wizard.setName(newName);
+        return wizard;
+    }
+
+    public static void addWeaponToPerso(Perso perso, Attack item){
+        if (perso instanceof Warrior){
+            ((Warrior) perso).setWeapon((Weapon) item);
+        }
+        if (perso instanceof Wizard){
+            ((Wizard) perso).setSpell((Spell) item);
+        }
     }
 }

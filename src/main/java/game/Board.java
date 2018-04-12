@@ -1,11 +1,8 @@
 package game;
 
-import game.ennemies.EnemiesGenerator;
-import game.items.ItemGenerator;
+import game.gameDB.SQLQueries;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.concurrent.ThreadLocalRandom;
-import static game.Methods.choiceString;
 
 /**
  * The type Board.
@@ -19,8 +16,8 @@ public class Board {
     /**
      * The Squares.
      */
-    public static Object Squares[] = new Object[63];
-    public static int boardSize = Squares.length;
+    public Object Squares[] = new Object[63];
+    public int boardSize = Squares.length;
 
     /**
      * Gets current square.
@@ -29,6 +26,10 @@ public class Board {
      */
     public int getCurrentSquare() {
         return currentSquare;
+    }
+
+    public Object[] getSquares() {
+        return Squares;
     }
 
     /**
@@ -43,23 +44,49 @@ public class Board {
 
     public void generateNewBoard() {
         Arrays.fill(Squares, null);
-        this.randomizeSquareContent(EnemiesGenerator.getEnemies());
-        this.randomizeSquareContent(ItemGenerator.getItems());
+        this.randomizeSquareContent(SQLQueries.getEnemiesFromDB());
+        this.randomizeSquareContent(SQLQueries.getPowerUpsFromDB());
+        this.randomizeSquareContent(SQLQueries.getBonusItemsFromDB());
     }
 
-    public Object[] getSquares() {
-        return Squares;
-    }
-
-    public void randomizeSquareContent(ArrayList contentArray) {
+    private void randomizeSquareContent(ArrayList contentArray) {
         int numberOfItems = contentArray.size();
-        while (numberOfItems > 0) {
-            Integer randomNum = Methods.generateRandomNum(0,boardSize-1);
-            if (Squares[randomNum] == null) {
-                Squares[randomNum] = contentArray.get(numberOfItems - 1);
+        int emptySquares = emptySquaresLeft();
+        while (numberOfItems > 0 && emptySquares > 0) {
+            Integer randomNum = Methods.generateRandomNum(0, boardSize - 1);
+            if (this.Squares[randomNum] == null) {
+                this.Squares[randomNum] = contentArray.get(numberOfItems - 1);
                 numberOfItems--;
+                emptySquares--;
             }
         }
+    }
+
+    private int emptySquaresLeft() {
+        int arraySize = boardSize;
+        int emptySquares = 0;
+        for (int i = 0; i < arraySize; i++) {
+            if (this.Squares[i] == null) {
+                emptySquares++;
+            }
+        }
+//        System.out.println("Il reste " + emptySquares + " cases vides");
+        return emptySquares;
+    }
+
+    @Override
+    public String toString() {
+        int squareIndex = 1;
+        for (Object square : Squares) {
+            System.out.print("Case n°" + squareIndex + " : ");
+            try {
+                System.out.println(square.toString());
+            } catch (NullPointerException e) {
+                System.out.println("empty");
+            }
+            squareIndex++;
+        }
+        return super.toString();
     }
 }
 

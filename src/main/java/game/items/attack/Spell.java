@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Spell extends Attack {
+
     public Spell(String name,AttackLevel attackLevel){
         super(name,attackLevel, new DefenseLevel());
     }
