@@ -19,6 +19,8 @@ public class Warrior extends Perso {
         this.shield = 0;
     }
 
+    public Warrior(){}
+
     //ACCESSEURS//
 
     public Weapon getWeapon() {
@@ -53,4 +55,10 @@ public class Warrior extends Perso {
     public String getPersoType() {
         return "Warrior";
     }
+
+    @Override
+    public String getWeaponType() {
+        return "Weapon";
+    }
+
 }

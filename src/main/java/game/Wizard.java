@@ -19,6 +19,7 @@ public class Wizard extends Perso {
         this.philter = 0;
     }
 
+    public Wizard(){}
 
     //ACCESSEURS//
 
@@ -54,4 +55,10 @@ public class Wizard extends Perso {
     public String getPersoType() {
         return "Wizard";
     }
+
+    @Override
+    public String getWeaponType() {
+        return "Spell";
+    }
+
 }
