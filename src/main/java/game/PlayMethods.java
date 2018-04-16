@@ -157,7 +157,7 @@ public class PlayMethods {
         return true;
     }
 
-    public static Perso createCharacter() {
+    public static Perso createCharacterFromScratch() {
         Scanner sc = new Scanner(System.in);
         String choiceCharacter;
         System.out.println("Choose your character : \n1.Warrior or \n2.Wizard");
@@ -174,7 +174,7 @@ public class PlayMethods {
             return nameWizard(wizard);
         }
         System.out.println("Wrong Entry");
-        return createCharacter();
+        return createCharacterFromScratch();
     }
 
     private static Warrior nameWarrior(Warrior warrior) {

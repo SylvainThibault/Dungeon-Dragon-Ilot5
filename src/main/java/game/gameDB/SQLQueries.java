@@ -1,6 +1,7 @@
 package game.gameDB;
-
 import game.Perso;
+import game.Warrior;
+import game.Wizard;
 import game.ennemies.Dragon;
 import game.ennemies.Enemy;
 import game.ennemies.Sorcerer;
@@ -12,10 +13,8 @@ import game.items.defense.Shield;
 import game.items.powerup.Bonus;
 import game.items.powerup.Joker;
 import game.items.powerup.Malus;
-
 import java.sql.*;
 import java.util.ArrayList;
-
 import static game.Methods.checkIfAnswerIsInResults;
 import static game.Methods.chooseNumber;
 
@@ -59,6 +58,62 @@ public class SQLQueries {
         }
     }
 
+    public static int choosePersoFromDB() {
+        int numberChosen = 0;
+        try {
+            Connection conn = connexionToDB();
+            Statement state = conn.createStatement();
+            String query = "SELECT * FROM persos";
+            ResultSet result = state.executeQuery(query);
+
+            int resultLength = displayQueryResultsNameAndReturnLength(result);
+            numberChosen = chooseNumber();
+            numberChosen = checkIfAnswerIsInResults(numberChosen, resultLength);
+            state.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        int indexOfChosenPerso = numberChosen;
+        return indexOfChosenPerso;
+    }
+
+    public static Perso createPersoFromDB(int indexOfChosenPerso) {
+        try {
+            Connection conn = connexionToDB();
+            Statement state = conn.createStatement();
+            String query = "SELECT * FROM persos WHERE id = ?";
+            PreparedStatement prepare = conn.prepareStatement(query);
+            prepare.setInt(1, indexOfChosenPerso);
+            ResultSet result = prepare.executeQuery();
+            result.first();
+
+            Perso perso;
+
+            if (result.getString("type").equals("Wizard")) {
+                String persoName = result.getString("name");
+                perso = new Wizard();
+                perso.setName(persoName);
+                return perso;
+            }
+
+            if (result.getString("type").equals("Warrior")) {
+                String persoName = result.getString("name");
+                perso = new Warrior();
+                perso.setName(persoName);
+                return perso;
+            }
+
+            prepare.close();
+            state.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public static Attack createItem(int indexOfChosenWeapon) {
         try {
             Connection conn = connexionToDB();
@@ -96,20 +151,6 @@ public class SQLQueries {
         return null;
     }
 
-    private static DefenseLevel getDefenseLevel(ResultSet result) throws SQLException {
-        int defenseDra = result.getInt("defense-dra");
-        int defenseSor = result.getInt("defense-sor");
-        int defenseSuc = result.getInt("defense-suc");
-        return new DefenseLevel(defenseDra, defenseSor, defenseSuc);
-    }
-
-    private static AttackLevel getAttackLevel(ResultSet result) throws SQLException {
-        int attackDra = result.getInt("attack-dra");
-        int attackSor = result.getInt("attack-sor");
-        int attackSuc = result.getInt("attack-suc");
-        return new AttackLevel(attackDra, attackSor, attackSuc);
-    }
-
     public static int chooseItemFromDB(Perso perso) {
         String typeWeapon = perso.getWeaponType();
         int numberChosen = 0;
@@ -122,7 +163,7 @@ public class SQLQueries {
             prepare.setString(1, typeWeapon);
             ResultSet result = prepare.executeQuery();
 
-            int resultLength = displayQueryResultsAndReturnLength(result);
+            int resultLength = displayQueryResultsNameAndReturnLength(result);
             numberChosen = chooseNumber();
             numberChosen = checkIfAnswerIsInResults(numberChosen, resultLength);
 
@@ -137,20 +178,6 @@ public class SQLQueries {
         }
         int indexOfChosenWeapon = numberChosen;
         return indexOfChosenWeapon;
-    }
-
-    private static int displayQueryResultsAndReturnLength(ResultSet result) {
-        int i = 0;
-        try {
-            i++;
-            while (result.next()) {
-                System.out.println(i + ": " + result.getString("name"));
-                i++;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return i;
     }
 
     public static ArrayList<Enemy> getEnemiesFromDB() {
@@ -187,6 +214,7 @@ public class SQLQueries {
                     enemies.add(newSorcerer);
                 }
             }
+            state.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -210,21 +238,21 @@ public class SQLQueries {
                     String bonusName = result.getString("name");
                     int bonusValue = result.getInt("value");
 
-                    Bonus newBonus = new Bonus(bonusName,bonusValue);
+                    Bonus newBonus = new Bonus(bonusName, bonusValue);
                     powerUps.add(newBonus);
                 }
                 if (result.getString("type").equals("Malus")) {
                     String malusName = result.getString("name");
                     int malusValue = result.getInt("value");
 
-                    Malus newMalus = new Malus(malusName,malusValue);
+                    Malus newMalus = new Malus(malusName, malusValue);
                     powerUps.add(newMalus);
                 }
                 if (result.getString("type").equals("Joker")) {
                     String jokerName = result.getString("name");
                     int jokerValue = result.getInt("value");
 
-                    Joker newJoker = new Joker(jokerName,jokerValue);
+                    Joker newJoker = new Joker(jokerName, jokerValue);
                     powerUps.add(newJoker);
                 }
             }
@@ -249,28 +277,28 @@ public class SQLQueries {
                     String weaponName = result.getString("name");
                     int weaponLevel = result.getInt("level");
 
-                    Weapon newWeapon = new Weapon(weaponName,new AttackLevel(weaponLevel));
+                    Weapon newWeapon = new Weapon(weaponName, new AttackLevel(weaponLevel));
                     powerUps.add(newWeapon);
                 }
                 if (result.getString("type").equals("Spell")) {
                     String spellName = result.getString("name");
                     int spellValue = result.getInt("level");
 
-                    Spell newSpell = new Spell(spellName,new AttackLevel(spellValue));
+                    Spell newSpell = new Spell(spellName, new AttackLevel(spellValue));
                     powerUps.add(newSpell);
                 }
                 if (result.getString("type").equals("Shield")) {
                     String shieldName = result.getString("name");
                     int shieldValue = result.getInt("level");
 
-                    Shield newShield = new Shield(shieldName,shieldValue);
+                    Shield newShield = new Shield(shieldName, shieldValue);
                     powerUps.add(newShield);
                 }
                 if (result.getString("type").equals("Philter")) {
                     String philterName = result.getString("name");
                     int philterValue = result.getInt("level");
 
-                    Philter newPhilter = new Philter(philterName,philterValue);
+                    Philter newPhilter = new Philter(philterName, philterValue);
                     powerUps.add(newPhilter);
                 }
             }
@@ -278,5 +306,33 @@ public class SQLQueries {
             ex.printStackTrace();
         }
         return powerUps;
+    }
+
+    private static int displayQueryResultsNameAndReturnLength(ResultSet result) {
+        int i = 0;
+        try {
+            i++;
+            while (result.next()) {
+                System.out.println(i + ": " + result.getString("name"));
+                i++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return (i-1);
+    }
+
+    private static DefenseLevel getDefenseLevel(ResultSet result) throws SQLException {
+        int defenseDra = result.getInt("defense-dra");
+        int defenseSor = result.getInt("defense-sor");
+        int defenseSuc = result.getInt("defense-suc");
+        return new DefenseLevel(defenseDra, defenseSor, defenseSuc);
+    }
+
+    private static AttackLevel getAttackLevel(ResultSet result) throws SQLException {
+        int attackDra = result.getInt("attack-dra");
+        int attackSor = result.getInt("attack-sor");
+        int attackSuc = result.getInt("attack-suc");
+        return new AttackLevel(attackDra, attackSor, attackSuc);
     }
 }

@@ -37,7 +37,7 @@ public class Methods {
 
     public static int checkIfAnswerIsInResults(int numberChosen, int resultLength) {
         try {
-            if (1 > numberChosen || numberChosen >= resultLength) {
+            if (1 > numberChosen || numberChosen > resultLength) {
                 throw new InputMismatchException();
             }
             return numberChosen;
