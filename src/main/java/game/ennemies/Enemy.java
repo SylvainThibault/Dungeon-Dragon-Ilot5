@@ -72,9 +72,12 @@ public abstract class Enemy implements Fightable{
         return this.getPower();
     }
 
+    @Override
+    public Boolean doesFight() {
+        return true;
+    }
 
-
-//    public abstract String fight(Perso perso);
+    //    public abstract String fight(Perso perso);
 //
 //    protected String fightResult(int lifeEnemy, Perso perso){
 //        if (lifeEnemy <= 0) {

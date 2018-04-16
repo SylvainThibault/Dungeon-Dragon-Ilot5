@@ -1,7 +1,6 @@
 package game.ennemies;
 
-import game.Perso;
-import game.combat.CombatDragon;
+import game.combat.combatenemy.CombatDragon;
 import game.interfaces.TypeCombat;
 
 public class Dragon extends Enemy {

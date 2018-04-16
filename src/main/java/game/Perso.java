@@ -1,6 +1,5 @@
 package game;
 
-import game.combat.CombatPersonnage;
 import game.interfaces.Fightable;
 import game.interfaces.TypeCombat;
 
@@ -47,9 +46,7 @@ public abstract class Perso implements Fightable{
         return this.armor;
     }
 
-    public TypeCombat getTypeCombat() {
-        return new CombatPersonnage();
-    }
+    public abstract TypeCombat getTypeCombat();
 
     //mutateurs//
 

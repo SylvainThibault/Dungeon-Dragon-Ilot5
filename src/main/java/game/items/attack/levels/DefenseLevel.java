@@ -1,8 +1,8 @@
 package game.items.attack.levels;
 
-import game.combat.CombatDragon;
-import game.combat.CombatSorcier;
-import game.combat.CombatSuccube;
+import game.combat.combatenemy.CombatDragon;
+import game.combat.combatenemy.CombatSorcier;
+import game.combat.combatenemy.CombatSuccube;
 import game.interfaces.TypeCombat;
 
 import java.util.HashMap;

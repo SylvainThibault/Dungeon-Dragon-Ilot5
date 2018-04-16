@@ -1,9 +1,8 @@
 package game.combat.combatperso;
-
 import game.interfaces.TypeCombat;
 
-public class CombatWizard implements TypeCombat{
-    String name = "Wizard";
+public class CombatWarrior implements TypeCombat{
+    String name = "Warrior";
 
     @Override
     public String getName() {

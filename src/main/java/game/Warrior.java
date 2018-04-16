@@ -1,6 +1,6 @@
 package game;
 
-import game.combat.CombatPersonnage;
+import game.combat.combatperso.CombatWarrior;
 import game.interfaces.TypeCombat;
 import game.items.attack.Weapon;
 
@@ -77,6 +77,18 @@ public class Warrior extends Perso {
             return shield + weapon.getDefenseBonus();
         }
         return shield;
+    }
+
+    @Override
+    public Boolean doesFight() {
+        return true;
+    }
+
+    @Override
+    public TypeCombat getTypeCombat() {
+        {
+            return new CombatWarrior();
+        }
     }
 
     public Weapon getWeapon() {

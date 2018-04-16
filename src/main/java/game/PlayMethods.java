@@ -1,6 +1,7 @@
 package game;
 
 import game.combat.Combat;
+import game.gameDB.SQLQueries;
 import game.interfaces.Fightable;
 import game.items.Item;
 import game.items.attack.Spell;
@@ -154,6 +155,7 @@ public class PlayMethods {
                         System.out.println("You're dead \n");
                         return false;
                     default:
+                        System.out.println("You didn't fight this enemy!");
                         break;
                 }
                 return true;
@@ -183,19 +185,22 @@ public class PlayMethods {
     }
 
     private static Warrior nameWarrior(Warrior warrior) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Choose the name  : ");
-        String newName = sc.nextLine();
+        String newName = choseName();
         warrior.setName(newName);
         return warrior;
     }
 
     private static Wizard nameWizard(Wizard wizard) {
+        String newName = choseName();
+        wizard.setName(newName);
+        return wizard;
+    }
+
+    private static String choseName(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Choose the name  : ");
         String newName = sc.nextLine();
-        wizard.setName(newName);
-        return wizard;
+        return newName;
     }
 
     public static void addWeaponToPerso(Perso perso, Item item){

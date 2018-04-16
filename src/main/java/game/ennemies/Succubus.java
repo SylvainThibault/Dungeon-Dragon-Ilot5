@@ -1,8 +1,6 @@
 package game.ennemies;
 
-import game.Perso;
-import game.Warrior;
-import game.combat.CombatSuccube;
+import game.combat.combatenemy.CombatSuccube;
 import game.interfaces.TypeCombat;
 
 public class Succubus extends Enemy {
@@ -40,4 +38,12 @@ public class Succubus extends Enemy {
 //        }
 //        return "no fight";
 //    }
+
+    @Override
+    public Boolean doesFight() {
+        if(typeCombat.getName().equals("Wizard")){
+            return false;
+        }
+        return true;
+    }
 }

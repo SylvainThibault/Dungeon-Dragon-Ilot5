@@ -1,6 +1,6 @@
 package game;
 
-import game.ennemies.Enemy;
+import game.combat.combatperso.CombatWizard;
 import game.interfaces.TypeCombat;
 import game.items.attack.Spell;
 
@@ -75,6 +75,18 @@ public class Wizard extends Perso {
             return philter + spell.getDefenseBonus();
         }
         return philter;
+    }
+
+    @Override
+    public Boolean doesFight() {
+        return true;
+    }
+
+    @Override
+    public TypeCombat getTypeCombat() {
+        {
+            return new CombatWizard();
+        }
     }
 
 //    @Override

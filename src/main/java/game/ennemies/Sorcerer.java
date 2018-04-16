@@ -1,8 +1,6 @@
 package game.ennemies;
 
-import game.Perso;
-import game.Wizard;
-import game.combat.CombatSorcier;
+import game.combat.combatenemy.CombatSorcier;
 import game.interfaces.TypeCombat;
 
 public class Sorcerer extends Enemy {
@@ -38,4 +36,13 @@ public class Sorcerer extends Enemy {
 //        }
 //        return "no fight";
 //    }
+
+
+    @Override
+    public Boolean doesFight() {
+        if (typeCombat.getName().equals("Warrior")){
+            return false;
+        }
+        return true;
+    }
 }

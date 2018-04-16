@@ -1,9 +1,9 @@
-package game.combat.combatperso;
+package game.combat.combatenemy;
 
 import game.interfaces.TypeCombat;
 
-public class CombatWizard implements TypeCombat{
-    String name = "Wizard";
+public class CombatSorcier implements TypeCombat{
+    private String name = "Sorcier";
 
     @Override
     public String getName() {
@@ -14,5 +14,4 @@ public class CombatWizard implements TypeCombat{
     public double getBonusDamageModifier() {
         return 1;
     }
-
 }
