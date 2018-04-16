@@ -20,18 +20,18 @@ import static game.Methods.chooseNumber;
 
 public class SQLQueries {
 
-    private static Connection connexionToDB() {
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/donjon-ilot5?" + "user=root&password=");
-        } catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
-        return conn;
-    }
+//    private static Connection connexionToDB() {
+//        Connection conn = null;
+//        try {
+//            conn = DriverManager.getConnection("jdbc:mysql://localhost/donjon-ilot5?" + "user=root&password=");
+//        } catch (SQLException ex) {
+//            // handle any errors
+//            System.out.println("SQLException: " + ex.getMessage());
+//            System.out.println("SQLState: " + ex.getSQLState());
+//            System.out.println("VendorError: " + ex.getErrorCode());
+//        }
+//        return conn;
+//    }
 
     public static void createPersoInDB(Perso perso) {
         String namePerso = perso.getName();
@@ -41,10 +41,9 @@ public class SQLQueries {
         int indexPerso = getPersosCount() + 1 ;
 
         try {
-            Connection conn = connexionToDB();
-            Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement state = DBConnection.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String query = "INSERT INTO persos (`id_perso`, `name`, `type`, `life`, `power`) VALUES ( ? , ? , ? , ? , ?)";
-            PreparedStatement prepare = conn.prepareStatement(query);
+            PreparedStatement prepare = DBConnection.getInstance().prepareStatement(query);
             prepare.setInt(1, indexPerso);
             prepare.setString(2, namePerso);
             prepare.setString(3, typePerso);
@@ -63,8 +62,7 @@ public class SQLQueries {
     public static int choosePersoFromDB() {
         int numberChosen = 0;
         try {
-            Connection conn = connexionToDB();
-            Statement state = conn.createStatement();
+            Statement state = DBConnection.getInstance().createStatement();
             String query = "SELECT * FROM persos";
             ResultSet result = state.executeQuery(query);
 
@@ -83,10 +81,9 @@ public class SQLQueries {
 
     public static Perso createPersoFromDB(int indexOfChosenPerso) {
         try {
-            Connection conn = connexionToDB();
-            Statement state = conn.createStatement();
+            Statement state = DBConnection.getInstance().createStatement();
             String query = "SELECT * FROM persos WHERE id_perso = ?";
-            PreparedStatement prepare = conn.prepareStatement(query);
+            PreparedStatement prepare = DBConnection.getInstance().prepareStatement(query);
             prepare.setInt(1, indexOfChosenPerso);
             ResultSet result = prepare.executeQuery();
             result.first();
@@ -118,10 +115,9 @@ public class SQLQueries {
 
     public static Attack createItem(int indexOfChosenWeapon) {
         try {
-            Connection conn = connexionToDB();
-            Statement state = conn.createStatement();
+            Statement state = DBConnection.getInstance().createStatement();
             String query = "SELECT * FROM items WHERE id = ?";
-            PreparedStatement prepare = conn.prepareStatement(query);
+            PreparedStatement prepare = DBConnection.getInstance().prepareStatement(query);
             prepare.setInt(1, indexOfChosenWeapon);
             ResultSet result = prepare.executeQuery();
             result.first();
@@ -158,10 +154,9 @@ public class SQLQueries {
         int numberChosen = 0;
 
         try {
-            Connection conn = connexionToDB();
-            Statement state = conn.createStatement();
+            Statement state = DBConnection.getInstance().createStatement();
             String query = "SELECT name FROM items WHERE type = ?";
-            PreparedStatement prepare = conn.prepareStatement(query);
+            PreparedStatement prepare = DBConnection.getInstance().prepareStatement(query);
             prepare.setString(1, typeWeapon);
             ResultSet result = prepare.executeQuery();
 
@@ -187,8 +182,7 @@ public class SQLQueries {
         ArrayList<Enemy> enemies = new ArrayList<>();
 
         try {
-            Connection conn = connexionToDB();
-            Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement state = DBConnection.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String query = "SELECT * FROM enemies";
             ResultSet result = state.executeQuery(query);
 
@@ -230,8 +224,7 @@ public class SQLQueries {
         ArrayList<Item> powerUps = new ArrayList<>();
 
         try {
-            Connection conn = connexionToDB();
-            Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement state = DBConnection.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String query = "SELECT * FROM powerups";
             ResultSet result = state.executeQuery(query);
 
@@ -269,8 +262,7 @@ public class SQLQueries {
     public static ArrayList<Item> getBonusItemsFromDB() {
         ArrayList<Item> powerUps = new ArrayList<>();
         try {
-            Connection conn = connexionToDB();
-            Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement state = DBConnection.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String query = "SELECT * FROM bonusitems";
             ResultSet result = state.executeQuery(query);
 
@@ -341,8 +333,7 @@ public class SQLQueries {
     private static int getPersosCount() {
         int numberOfPersos = 0;
         try {
-            Connection conn = connexionToDB();
-            Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement state = DBConnection.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String query = "SELECT * FROM persos";
             ResultSet result = state.executeQuery(query);
             result.last();
