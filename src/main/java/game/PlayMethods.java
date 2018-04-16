@@ -9,6 +9,8 @@ import game.items.powerup.Bonus;
 import game.items.powerup.Joker;
 import game.items.powerup.Malus;
 import java.util.Scanner;
+
+import static game.Methods.checkIfAnswerIsInResults;
 import static game.Methods.choiceString;
 
 public class PlayMethods {
@@ -160,7 +162,7 @@ public class PlayMethods {
         return true;
     }
 
-    public static Perso createCharacter() {
+    private static Perso createCharacterFromScratch() {
         Scanner sc = new Scanner(System.in);
         String choiceCharacter;
         System.out.println("Choose your character : \n1.Warrior or \n2.Wizard");
@@ -177,7 +179,7 @@ public class PlayMethods {
             return nameWizard(wizard);
         }
         System.out.println("Wrong Entry");
-        return createCharacter();
+        return createCharacterFromScratch();
     }
 
     private static Warrior nameWarrior(Warrior warrior) {
@@ -203,5 +205,32 @@ public class PlayMethods {
         if (perso instanceof Wizard){
             ((Wizard) perso).setSpell((Spell) item);
         }
+    }
+
+    public static int characterMenu() {
+        System.out.println("Welcome to DD-ilot5");
+        System.out.println("What do you want to do :\n 1. Create Character\n 2. Choose Character in database");
+        int numberChosen = Methods.chooseNumber();
+        numberChosen = checkIfAnswerIsInResults(numberChosen, 2);
+
+        return numberChosen;
+    }
+
+    public static Perso createCharacter(int characterMenuAnswer) {
+        Perso character = null;
+        switch (characterMenuAnswer) {
+            case 1:
+                character = PlayMethods.createCharacterFromScratch();
+                SQLQueries.createPersoInDB(character);
+                break;
+            case 2:
+                int chosenPerso = SQLQueries.choosePersoFromDB();
+                character = SQLQueries.createPersoFromDB(chosenPerso);
+                break;
+            default:
+                System.out.println("You're in createCharacter Switch default case (HINT : You shouldn't)");
+                break;
+        }
+        return character;
     }
 }

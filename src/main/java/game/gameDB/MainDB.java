@@ -1,4 +1,5 @@
 package game.gameDB;
+
 import game.Perso;
 import game.PlayMethods;
 import game.items.Item;
@@ -6,13 +7,13 @@ import game.items.Item;
 public class MainDB {
 
     public static void main(String[] args) {
+        int createOrChoseCharacter = PlayMethods.characterMenu();
+        Perso character = PlayMethods.createCharacter(createOrChoseCharacter);
 
-        Perso character = PlayMethods.createCharacter();
-        SQLQueries.createPersoInDB(character);
         int chosenItem = SQLQueries.chooseItemFromDB(character);
         Item newItem = SQLQueries.createItem(chosenItem);
         PlayMethods.addWeaponToPerso(character, newItem);
-//        System.out.println(character.toString());
+        System.out.println(character.toString());
 
         boolean play;
         do {
@@ -21,4 +22,3 @@ public class MainDB {
         } while (play);
     }
 }
-

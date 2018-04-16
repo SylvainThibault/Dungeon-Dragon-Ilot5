@@ -4,22 +4,41 @@ import game.combat.CombatPersonnage;
 import game.interfaces.TypeCombat;
 import game.items.attack.Weapon;
 
+/**
+ * The type Warrior.
+ */
 public class Warrior extends Perso {
     private Weapon weapon;
     private int shield;
 
+    /**
+     * Instantiates a new Warrior.
+     *
+     * @param name   the name
+     * @param weapon the weapon
+     * @param shield the shield
+     */
     public Warrior(String name, Weapon weapon, int shield) {
         super(name);
         this.weapon = weapon;
         this.shield = shield;
     }
 
+    /**
+     * Instantiates a new Warrior.
+     *
+     * @param name   the name
+     * @param weapon the weapon
+     */
     public Warrior(String name, Weapon weapon) {
         super(name);
         this.weapon = weapon;
         this.shield = 0;
     }
 
+    /**
+     * Instantiates a new Warrior.
+     */
     public Warrior(){}
 
     @Override
@@ -62,5 +81,10 @@ public class Warrior extends Perso {
 
     public Weapon getWeapon() {
         return weapon;
+    }
+
+    // Méthode toString : Affiche les informations d'un objet
+    public String toString(){
+        return super.toString() + "\nWeapon : " + weapon + "\nShield : " + shield;
     }
 }
