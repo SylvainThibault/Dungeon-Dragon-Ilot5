@@ -14,18 +14,11 @@ public abstract class Attack extends Item{
         this.defenseLevel = defenseLevel;
     }
 
-    /**
-     * Getter of the level attribute
-     * @return power level of the weapon / spell
-     */
+
 //    public int getLevel() {
 //        return this.level;
 //    }
-//
-//    /**
-//     * Setter of the level attribute
-//     * @param
-//     */
+
 
     public void setAttackLevel(AttackLevel attackLevel) {
         this.attackLevel= attackLevel;

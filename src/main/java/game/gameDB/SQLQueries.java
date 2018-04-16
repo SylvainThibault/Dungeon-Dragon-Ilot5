@@ -38,16 +38,18 @@ public class SQLQueries {
         String typePerso = perso.getPersoType();
         int lifePerso = perso.getLife();
         int powerPerso = perso.getPower();
+        int indexPerso = getPersosCount() + 1 ;
 
         try {
             Connection conn = connexionToDB();
             Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String query = "INSERT INTO persos (`name`, `type`, `life`, `power`) VALUES (? , ? , ? , ?)";
+            String query = "INSERT INTO persos (`id_perso`, `name`, `type`, `life`, `power`) VALUES ( ? , ? , ? , ? , ?)";
             PreparedStatement prepare = conn.prepareStatement(query);
-            prepare.setString(1, namePerso);
-            prepare.setString(2, typePerso);
-            prepare.setInt(3, lifePerso);
-            prepare.setInt(4, powerPerso);
+            prepare.setInt(1, indexPerso);
+            prepare.setString(2, namePerso);
+            prepare.setString(3, typePerso);
+            prepare.setInt(4, lifePerso);
+            prepare.setInt(5, powerPerso);
             prepare.executeUpdate();
 
             prepare.close();
@@ -83,7 +85,7 @@ public class SQLQueries {
         try {
             Connection conn = connexionToDB();
             Statement state = conn.createStatement();
-            String query = "SELECT * FROM persos WHERE id = ?";
+            String query = "SELECT * FROM persos WHERE id_perso = ?";
             PreparedStatement prepare = conn.prepareStatement(query);
             prepare.setInt(1, indexOfChosenPerso);
             ResultSet result = prepare.executeQuery();
@@ -334,5 +336,20 @@ public class SQLQueries {
         int attackSor = result.getInt("attack-sor");
         int attackSuc = result.getInt("attack-suc");
         return new AttackLevel(attackDra, attackSor, attackSuc);
+    }
+
+    private static int getPersosCount() {
+        int numberOfPersos = 0;
+        try {
+            Connection conn = connexionToDB();
+            Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String query = "SELECT * FROM persos";
+            ResultSet result = state.executeQuery(query);
+            result.last();
+            numberOfPersos = result.getRow();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return numberOfPersos;
     }
 }

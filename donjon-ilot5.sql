@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 12 avr. 2018 à 15:16
+-- Généré le :  lun. 16 avr. 2018 à 11:22
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -146,38 +146,22 @@ CREATE TABLE IF NOT EXISTS `item_perso` (
 DROP TABLE IF EXISTS `persos`;
 CREATE TABLE IF NOT EXISTS `persos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_perso` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `type` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `life` int(11) NOT NULL,
   `power` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Déchargement des données de la table `persos`
 --
 
-INSERT INTO `persos` (`id`, `name`, `type`, `life`, `power`) VALUES
-(1, 'Eric les doigts de fée', 'Wizard', 100, 15),
-(51, 'Papa', 'Warrior', 100, 15),
-(52, 'Fokoff', 'Wizard', 100, 15),
-(53, 'bop', 'Warrior', 100, 15),
-(54, 'Linguini', 'Warrior', 100, 15),
-(55, 'Lizzie', 'Wizard', 100, 15),
-(56, 'wiz', 'Warrior', 100, 15),
-(57, 'wiz', 'Wizard', 100, 15),
-(58, 'pi', 'Wizard', 100, 15),
-(59, 'prtrtrr', 'Warrior', 100, 15),
-(60, '2', 'Wizard', 100, 15),
-(61, 'gdoutre', 'Warrior', 100, 15),
-(62, 'jjj', 'Warrior', 100, 15),
-(63, '', 'Warrior', 100, 15),
-(64, 'jn', 'Warrior', 100, 15),
-(65, '1', 'Warrior', 100, 15),
-(66, '2', 'Warrior', 100, 15),
-(67, 'ytd', 'Wizard', 100, 15),
-(68, 'pepe', 'Warrior', 100, 15),
-(69, 'preepep', 'Warrior', 100, 15);
+INSERT INTO `persos` (`id`, `id_perso`, `name`, `type`, `life`, `power`) VALUES
+(1, 1, 'Eric les doigts de fée', 'Wizard', 100, 15),
+(80, 2, 'test', 'Warrior', 100, 15),
+(82, 3, 'popo', 'Warrior', 100, 15);
 
 -- --------------------------------------------------------
 
