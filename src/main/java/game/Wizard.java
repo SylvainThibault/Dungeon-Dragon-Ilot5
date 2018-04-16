@@ -1,6 +1,7 @@
 package game;
 
 import game.ennemies.Enemy;
+import game.interfaces.TypeCombat;
 import game.items.attack.Spell;
 
 public class Wizard extends Perso {
@@ -41,24 +42,49 @@ public class Wizard extends Perso {
         this.philter = Philter;
     }
 
+    public void setTypeCombat(TypeCombat typeCombat){
+        spell.setTypeCombat(typeCombat);
+    }
+
     // Méthode toString : Affiche les informations d'un objet
     public String toString() {
         return super.toString() + "\nSpell : " + spell.toString() + "\nPhilter : " + philter;
     }
 
     @Override
-    public int getBonusDamage(Enemy enemy) {
-        return this.getSpell().getLevel(enemy);
-    }
-
-    @Override
     public String getPersoType() {
-        return "Wizard";
+        return "wizard";
     }
 
     @Override
     public String getWeaponType() {
-        return "Spell";
+        return "spell";
     }
+
+    @Override
+    public int getBonusDamage() {
+        int bonusDamage = 0;
+        if (spell != null){
+            bonusDamage = (int) (spell.getPower() * spell.getBonusDamageModifier());
+        }
+        return bonusDamage;
+    }
+    @Override
+    public int getDefenseBonus() {
+        if (spell != null){
+            return philter + spell.getDefenseBonus();
+        }
+        return philter;
+    }
+
+//    @Override
+//    public String getPersoType() {
+//        return "Wizard";
+//    }
+//
+//    @Override
+//    public String getWeaponType() {
+//        return "Spell";
+//    }
 
 }

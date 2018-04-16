@@ -5,6 +5,9 @@ import game.items.attack.Weapon;
 import java.util.*;
 
 import game.items.attack.Spell;
+import game.items.attack.generators.SpellGenerator;
+import game.items.attack.generators.WeaponGenerator;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -92,7 +95,7 @@ public class Main {
     }
 
     private static Spell choseSpell() {
-        Map<Integer, Spell> spellMap = Spell.getSpell();
+        Map<Integer, Spell> spellMap = SpellGenerator.getBaseSpells();
         System.out.println("Choose a spell");
         for (Map.Entry<Integer, Spell> entry : spellMap.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue().getName());
@@ -112,7 +115,7 @@ public class Main {
     }
 
     private static Weapon choseWeapon() {
-        Map<Integer, Weapon> weaponMap = Weapon.getWeapons();
+        Map<Integer, Weapon> weaponMap = WeaponGenerator.getBaseWeapons();
         System.out.println("Choose a weapon");
 
         for (Map.Entry<Integer, Weapon> entry : weaponMap.entrySet()) {

@@ -7,6 +7,8 @@ import game.ennemies.Sorcerer;
 import game.ennemies.Succubus;
 import game.items.Item;
 import game.items.attack.*;
+import game.items.attack.levels.AttackLevel;
+import game.items.attack.levels.DefenseLevel;
 import game.items.defense.Philter;
 import game.items.defense.Shield;
 import game.items.powerup.Bonus;
@@ -59,7 +61,7 @@ public class SQLQueries {
         }
     }
 
-    public static Attack createItem(int indexOfChosenWeapon) {
+    public static Item createItem(int indexOfChosenWeapon) {
         try {
             Connection conn = connexionToDB();
             Statement state = conn.createStatement();
@@ -69,7 +71,7 @@ public class SQLQueries {
             ResultSet result = prepare.executeQuery();
             result.first();
 
-            Attack item;
+            Item item;
 
             if (result.getString("type").equals("Weapon")) {
                 String weaponName = result.getString("name");

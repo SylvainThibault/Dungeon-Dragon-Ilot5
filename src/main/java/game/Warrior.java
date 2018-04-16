@@ -1,6 +1,7 @@
 package game;
 
-import game.ennemies.Enemy;
+import game.combat.CombatPersonnage;
+import game.interfaces.TypeCombat;
 import game.items.attack.Weapon;
 
 public class Warrior extends Perso {
@@ -21,44 +22,45 @@ public class Warrior extends Perso {
 
     public Warrior(){}
 
-    //ACCESSEURS//
-
-    public Weapon getWeapon() {
-        return this.weapon;
-    }
-
-    public int getShield() {
-        return this.shield;
-    }
-
-    // MUTATEURS//
-
-    public void setWeapon(Weapon Weapon){
-        this.weapon = Weapon;
-    }
-
-    public void setShield(int Shield){
-        this.shield = Shield;
-    }
-
-    // Méthode toString : Affiche les informations d'un objet
-    public String toString(){
-        return super.toString() + "\nWeapon : " + weapon + "\nShield : " + shield;
-    }
-
-    @Override
-    public int getBonusDamage(Enemy enemy) {
-        return this.getWeapon().getLevel(enemy);
-    }
-
     @Override
     public String getPersoType() {
-        return "Warrior";
+        return "warrior";
     }
 
     @Override
     public String getWeaponType() {
-        return "Weapon";
+        return "weapon";
     }
 
+    //SETTERS
+
+    public void setWeapon (Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public void setTypeCombat(TypeCombat typeCombat){
+        weapon.setTypeCombat(typeCombat);
+    }
+
+    //GETTERS
+
+    @Override
+    public int getBonusDamage() {
+        int bonusDamage = 0;
+        if (weapon != null){
+            bonusDamage = (int) (weapon.getPower() * weapon.getBonusDamageModifier());
+        }
+        return bonusDamage;
+    }
+    @Override
+    public int getDefenseBonus() {
+        if (weapon != null){
+            return shield + weapon.getDefenseBonus();
+        }
+        return shield;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
 }

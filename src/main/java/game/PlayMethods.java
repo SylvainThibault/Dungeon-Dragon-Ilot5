@@ -1,7 +1,8 @@
 package game;
 
-import game.ennemies.Enemy;
-import game.items.attack.Attack;
+import game.combat.Combat;
+import game.interfaces.Fightable;
+import game.items.Item;
 import game.items.attack.Spell;
 import game.items.attack.Weapon;
 import game.items.powerup.Bonus;
@@ -134,8 +135,10 @@ public class PlayMethods {
                 return true;
             }
 
-            if (newCurrentSquare instanceof Enemy) {
-                String fightResult = ((Enemy) newCurrentSquare).fight(player);
+            if (newCurrentSquare instanceof Fightable) {
+                Combat combatActuel = new Combat(player, (Fightable) newCurrentSquare);
+                String fightResult = combatActuel.start();
+
                 switch (fightResult) {
                     case "win":
                         newCurrentSquareIndex += 2;
@@ -193,7 +196,7 @@ public class PlayMethods {
         return wizard;
     }
 
-    public static void addWeaponToPerso(Perso perso, Attack item){
+    public static void addWeaponToPerso(Perso perso, Item item){
         if (perso instanceof Warrior){
             ((Warrior) perso).setWeapon((Weapon) item);
         }

@@ -1,8 +1,7 @@
 package game.items;
 
-import game.items.attack.AttackLevel;
-import game.items.attack.Spell;
-import game.items.attack.Weapon;
+import game.items.attack.generators.SpellGenerator;
+import game.items.attack.generators.WeaponGenerator;
 import game.items.defense.Philter;
 import game.items.defense.Shield;
 import game.items.powerup.Bonus;
@@ -22,10 +21,10 @@ public class ItemGenerator {
         items.add( new Philter("small philter", 2));
         items.add( new Philter("philter", 3));
         items.add( new Philter("large philter", 5));
-        items.add( new Spell("indignation", new AttackLevel(50)));
-        items.add( new Spell("teamEric", new AttackLevel(100)));
-        items.add( new Weapon("frostmourne", new AttackLevel(50)));
-        items.add( new Weapon("soul edge", new AttackLevel(60)));
+        items.add( SpellGenerator.eclair("Indignation"));
+        items.add( SpellGenerator.invisibilite("TeamEric"));
+        items.add( WeaponGenerator.epee("Frostmourne"));
+        items.add( WeaponGenerator.epee("SoulEdge"));
         items.add( new Malus("carton rouge", 5));
         items.add( new Malus("boule noire", 5));
         items.add( new Bonus("drop the mic", 5));

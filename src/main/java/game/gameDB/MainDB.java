@@ -1,8 +1,7 @@
 package game.gameDB;
 import game.Perso;
 import game.PlayMethods;
-import game.items.attack.Attack;
-import java.util.*;
+import game.items.Item;
 
 public class MainDB {
 
@@ -11,7 +10,7 @@ public class MainDB {
         Perso character = PlayMethods.createCharacter();
         SQLQueries.createPersoInDB(character);
         int chosenItem = SQLQueries.chooseItemFromDB(character);
-        Attack newItem = SQLQueries.createItem(chosenItem);
+        Item newItem = SQLQueries.createItem(chosenItem);
         PlayMethods.addWeaponToPerso(character, newItem);
 //        System.out.println(character.toString());
 

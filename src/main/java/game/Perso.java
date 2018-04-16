@@ -1,8 +1,10 @@
 package game;
 
-import game.ennemies.Enemy;
+import game.combat.CombatPersonnage;
+import game.interfaces.Fightable;
+import game.interfaces.TypeCombat;
 
-public abstract class Perso {
+public abstract class Perso implements Fightable{
 
     //Stocke variable
     private String name;
@@ -45,6 +47,10 @@ public abstract class Perso {
         return this.armor;
     }
 
+    public TypeCombat getTypeCombat() {
+        return new CombatPersonnage();
+    }
+
     //mutateurs//
 
     // Définit variable
@@ -72,9 +78,20 @@ public abstract class Perso {
         return "Name : " + name + "\nPower : " + power + "\nLife : " + life + "\nImage : " + image + "\nArmor : " + armor;
     }
 
-    public abstract int getBonusDamage(Enemy enemy);
+    public int getTotalDamage(){
+        return this.getPower() + this.getBonusDamage();
+    }
+
+    public void takeDamage(int damageTaken) {
+        int defense = this.getDefenseBonus();
+        if (defense == 0){
+            defense = 1;
+        }
+        this.setLife(this.getLife() - (damageTaken / defense));
+    }
+
 
     public abstract String getPersoType();
-
+//
     public abstract String getWeaponType();
 }
